@@ -2,10 +2,12 @@
 
 import { motion } from "motion/react";
 import { Ring, RingCenter, RingChart } from "@/components/charts";
+import { ExperienceCard } from "@/components/experience-card";
 import { useLang } from "@/components/lang-provider";
 import { Nav } from "@/components/nav";
 import { PixelMosaic } from "@/components/pixel-mosaic";
 import { Reveal } from "@/components/reveal";
+import { EXPERIENCES } from "@/lib/experiences";
 
 const EASE = [0.32, 0.72, 0, 1] as const;
 
@@ -35,6 +37,19 @@ const TIMELINE = [
       en: "One-semester academic exchange: microprocessors, business management, machine learning, international economics, project management.",
     },
     tags: ["MICROPROCESSORS", "ML", "MANAGEMENT"],
+  },
+  {
+    period: "2019 — 2022",
+    title: {
+      fr: "Bac Général — Maths / Physique-Chimie / SVT",
+      en: "French Baccalauréat — Maths / Physics-Chemistry / Earth & Life Sciences",
+    },
+    school: "Lycée",
+    desc: {
+      fr: "Bac général avec spécialités mathématiques, physique-chimie et sciences de la vie et de la Terre (SVT), option maths expertes en terminale.",
+      en: "General baccalauréat with mathematics, physics-chemistry and earth & life sciences (SVT) specializations, expert maths option in final year.",
+    },
+    tags: ["MATHS", "PHYSIQUE-CHIMIE", "SVT", "MATHS EXPERTES"],
   },
 ];
 
@@ -67,45 +82,6 @@ const SKILLS = [
   { label: "Python", value: 84, maxValue: 100 },
   { label: "TypeScript", value: 80, maxValue: 100 },
   { label: "VHDL / ASM", value: 72, maxValue: 100 },
-];
-
-const EXPERIENCES = [
-  {
-    name: "Digital Twin UNS + AI",
-    desc: {
-      fr: "Prototypes industriels chez Accenture : jumeau de données (UNS) et stack IA locale navigateur (Silero VAD, STT en WebAssembly/ONNX), agents LLM autonomes.",
-      en: "Industrial prototypes at Accenture: data twin (UNS) and in-browser AI stack (Silero VAD, STT via WebAssembly/ONNX), autonomous LLM agents.",
-    },
-    tag: "ACCENTURE",
-    span: "md:col-span-7",
-  },
-  {
-    name: "JEECE — Head of IS & DPO",
-    desc: {
-      fr: "Direction du SI de la junior-entreprise d'ECE Paris : équipe de 3, stratégie SI, conformité RGPD, delivery Agile.",
-      en: "Led the IS of ECE Paris' junior enterprise: team of 3, IS strategy, GDPR compliance, Agile delivery.",
-    },
-    tag: "JEECE",
-    span: "md:col-span-5",
-  },
-  {
-    name: "Immersion cybersécurité — CEA",
-    desc: {
-      fr: "7 jours avec l'équipe S3i : rapports d'incidents, pentesting, gestion de crise au sein de la direction de la sûreté nucléaire.",
-      en: "7 days with the S3i team: incident reports, pentesting, crisis management within the nuclear safety directorate.",
-    },
-    tag: "CEA",
-    span: "md:col-span-5",
-  },
-  {
-    name: "Discovery Program — Microsoft",
-    desc: {
-      fr: "Conception et pitch d'un concept produit tech en une semaine, filière Commercial Executive.",
-      en: "Designed and pitched a tech product concept in one week, Commercial Executive track.",
-    },
-    tag: "MICROSOFT",
-    span: "md:col-span-7",
-  },
 ];
 
 function Eyebrow({ children }: { children: string }) {
@@ -283,30 +259,13 @@ export default function AboutPage() {
               <Eyebrow>{t.about.projectsEyebrow}</Eyebrow>
             </Reveal>
             <div className="mt-12 grid grid-cols-1 border-t border-l border-white/10 md:grid-cols-12">
-              {EXPERIENCES.map((p, i) => (
+              {EXPERIENCES.map((exp, i) => (
                 <Reveal
-                  className={`border-r border-b border-white/10 ${p.span}`}
+                  className={`border-r border-b border-white/10 ${exp.span}`}
                   delay={i * 0.06}
-                  key={p.name}
+                  key={exp.name}
                 >
-                  <div className="group flex h-full min-h-44 flex-col justify-between p-6 transition-colors duration-500 hover:bg-white/5 md:p-8">
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-[10px] tracking-[0.2em] text-white/40">
-                        {p.tag}
-                      </span>
-                      <span className="text-white/40 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1">
-                        →
-                      </span>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-medium tracking-tight md:text-2xl">
-                        {p.name}
-                      </h3>
-                      <p className="mt-2 text-sm text-white/50">
-                        {p.desc[lang]}
-                      </p>
-                    </div>
-                  </div>
+                  <ExperienceCard exp={exp} />
                 </Reveal>
               ))}
             </div>

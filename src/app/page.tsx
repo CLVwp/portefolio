@@ -11,10 +11,12 @@ import {
   RingChart,
   XAxis,
 } from "@/components/charts";
+import { ExperienceCard } from "@/components/experience-card";
 import { useLang } from "@/components/lang-provider";
 import { Nav } from "@/components/nav";
 import { PixelMosaic } from "@/components/pixel-mosaic";
 import { Reveal } from "@/components/reveal";
+import { EXPERIENCES } from "@/lib/experiences";
 
 const EASE = [0.32, 0.72, 0, 1] as const;
 
@@ -46,47 +48,6 @@ const SKILLS = [
   { label: "VHDL / ASM", value: 72, maxValue: 100 },
 ];
 
-const EXPERIENCES = ["ACCENTURE", "CEA", "MICROSOFT", "JEECE", "ECE PARIS"];
-
-const PROJECTS = [
-  {
-    name: "Digital Twin UNS + AI",
-    desc: {
-      fr: "Jumeau de données industriel (UNS) et stack IA locale navigateur — WebAssembly/ONNX, agents LLM autonomes.",
-      en: "Industrial data twin (UNS) and in-browser AI stack — WebAssembly/ONNX, autonomous LLM agents.",
-    },
-    tag: "ACCENTURE",
-    span: "md:col-span-7",
-  },
-  {
-    name: "JEECE — Head of IS",
-    desc: {
-      fr: "Direction du SI de la junior-entreprise d'ECE Paris, équipe de 3, conformité RGPD, delivery Agile.",
-      en: "Led the IS of ECE Paris' junior enterprise, team of 3, GDPR compliance, Agile delivery.",
-    },
-    tag: "LEADERSHIP",
-    span: "md:col-span-5",
-  },
-  {
-    name: "Cybersécurité — CEA",
-    desc: {
-      fr: "Immersion S3i : rapports d'incidents, pentesting, gestion de crise.",
-      en: "S3i immersion: incident reports, pentesting, crisis management.",
-    },
-    tag: "SÉCURITÉ",
-    span: "md:col-span-5",
-  },
-  {
-    name: "Ce portfolio",
-    desc: {
-      fr: "Next.js 16, Motion, Bklit charts — 60fps, animations physiques, zéro template.",
-      en: "Next.js 16, Motion, Bklit charts — 60fps, physical animations, zero template.",
-    },
-    tag: "WEB",
-    span: "md:col-span-7",
-  },
-];
-
 function Eyebrow({ children }: { children: string }) {
   return (
     <span className="font-mono text-[10px] tracking-[0.25em] text-white/50 uppercase">
@@ -110,7 +71,7 @@ function Cta({ label, href }: { label: string; href: string }) {
 }
 
 export default function Home() {
-  const { t, lang } = useLang();
+  const { t } = useLang();
 
   return (
     <div className="relative min-h-[100dvh] overflow-x-clip bg-black text-white">
@@ -169,7 +130,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ─── Expériences — bande style clients ─── */}
+        {/* ─── Expériences — grille partagée avec /about ─── */}
         <section className="border-b border-white/10">
           <div className="mx-auto max-w-6xl p-8 md:p-16">
             <Reveal>
@@ -178,18 +139,14 @@ export default function Home() {
                 {t.home.workTitle}
               </h2>
             </Reveal>
-            <div className="mt-12 grid grid-cols-2 border-t border-l border-white/10 md:grid-cols-5">
-              {EXPERIENCES.map((name, i) => (
+            <div className="mt-12 grid grid-cols-1 border-t border-l border-white/10 md:grid-cols-12">
+              {EXPERIENCES.map((exp, i) => (
                 <Reveal
-                  className="border-r border-b border-white/10"
-                  delay={i * 0.05}
-                  key={name}
+                  className={`border-r border-b border-white/10 ${exp.span}`}
+                  delay={i * 0.06}
+                  key={exp.name}
                 >
-                  <div className="flex h-28 items-center justify-center p-4 transition-colors duration-500 hover:bg-white/5">
-                    <span className="text-center font-mono text-xs tracking-[0.2em] text-white/60">
-                      {name}
-                    </span>
-                  </div>
+                  <ExperienceCard exp={exp} />
                 </Reveal>
               ))}
             </div>
@@ -250,46 +207,6 @@ export default function Home() {
                   </RingChart>
                 </div>
               </Reveal>
-            </div>
-          </div>
-        </section>
-
-        {/* ─── Projets — grille stricte ─── */}
-        <section className="border-b border-white/10">
-          <div className="mx-auto max-w-6xl p-8 md:p-16">
-            <Reveal>
-              <Eyebrow>{t.home.projectsEyebrow}</Eyebrow>
-              <h2 className="mt-4 text-4xl font-medium tracking-tight sm:text-5xl">
-                {t.home.projectsTitle}
-              </h2>
-            </Reveal>
-            <div className="mt-12 grid grid-cols-1 border-t border-l border-white/10 md:grid-cols-12">
-              {PROJECTS.map((p, i) => (
-                <Reveal
-                  className={`border-r border-b border-white/10 ${p.span}`}
-                  delay={i * 0.06}
-                  key={p.name}
-                >
-                  <div className="group flex h-full min-h-44 flex-col justify-between p-6 transition-colors duration-500 hover:bg-white/5 md:p-8">
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-[10px] tracking-[0.2em] text-white/40">
-                        {p.tag}
-                      </span>
-                      <span className="text-white/40 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1">
-                        →
-                      </span>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-medium tracking-tight md:text-2xl">
-                        {p.name}
-                      </h3>
-                      <p className="mt-2 text-sm text-white/50">
-                        {p.desc[lang]}
-                      </p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
             </div>
           </div>
         </section>

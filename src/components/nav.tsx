@@ -11,7 +11,7 @@ const EASE = [0.32, 0.72, 0, 1] as const;
 export function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const { lang, t, toggle } = useLang();
+  const { lang, t, toggle, theme, toggleTheme } = useLang();
 
   const links = [
     { label: t.nav.home, href: "/" },
@@ -57,6 +57,14 @@ export function Nav() {
               type="button"
             >
               {lang === "fr" ? "FR" : "EN"}
+            </button>
+            <button
+              aria-label="Toggle theme"
+              className="flex items-center border-l border-white/10 px-4 font-mono text-xs tracking-[0.2em] text-white/70 uppercase transition-colors hover:bg-white/5 hover:text-white"
+              onClick={toggleTheme}
+              type="button"
+            >
+              {theme === "dark" ? "☾" : "☀"}
             </button>
             <button
               aria-label={t.nav.menu}
