@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { CompanyLogo } from "@/components/company-logo";
 import { useLang } from "@/components/lang-provider";
 
@@ -21,9 +22,16 @@ export interface Experience {
  */
 export function ExperienceCard({ exp }: { exp: Experience }) {
   const { lang } = useLang();
+  // Touch devices have no hover: tap toggles the details zone instead.
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="group flex h-full flex-col p-6 transition-colors duration-500 hover:bg-hover md:p-8">
+    <div
+      className="group flex h-full flex-col p-6 transition-colors duration-500 hover:bg-hover md:p-8"
+      onClick={() => {
+        if (!window.matchMedia("(hover: hover)").matches) setOpen((o) => !o);
+      }}
+    >
       <div className="flex items-center justify-between">
         <CompanyLogo
           company={exp.logo}
@@ -43,8 +51,10 @@ export function ExperienceCard({ exp }: { exp: Experience }) {
         </p>
         <p className="mt-3 text-sm text-fg-muted">{exp.desc[lang]}</p>
       </div>
-      {/* Hover-expand zone */}
-      <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:grid-rows-[1fr]">
+      {/* Hover-expand zone (desktop) / tap-toggle zone (touch) */}
+      <div
+        className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:grid-rows-[1fr] ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+      >
         <div className="overflow-hidden">
           <p className="mt-4 whitespace-pre-line border-t border-hairline pt-4 text-sm leading-relaxed text-fg/60">
             {exp.details[lang]}
