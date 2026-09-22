@@ -176,8 +176,8 @@ const TIMELINE: {
     },
     school: "ECE Paris · Graduate School of Engineering",
     desc: {
-      fr: "Spécialisation Systèmes Embarqués (Aéronautique & Espace), filière internationale. Cours : systèmes embarqués, microprocesseurs, temps réel, machine learning, génie logiciel, gestion de projet.",
-      en: "Embedded Systems specialization (Aeronautics & Space), international track. Coursework: embedded systems, microprocessors, real-time, machine learning, software engineering, project management.",
+      fr: "Major : Ingénierie des Systèmes Embarqués (Aéronautique & Espace) · Minor : Technologies Quantiques. Filière internationale. Cours : systèmes embarqués, microprocesseurs, temps réel, machine learning, génie logiciel, gestion de projet.",
+      en: "Major in Embedded Systems Engineering (Aeronautics & Space), minor in Quantum Technologies. International track. Coursework: embedded systems, microprocessors, real-time, machine learning, software engineering, project management.",
     },
     tags: [
       "Développement de logiciels",
@@ -255,16 +255,44 @@ const TIMELINE: {
 
 const CERTS = [
   {
+    issuer: "Anthropic",
+    name: "Claude Partner Badge · Claude Code",
+  },
+  {
+    issuer: "Anthropic",
+    name: "Introduction to Claude Cowork",
+  },
+  {
+    issuer: "Anthropic",
+    name: "AI Fluency for Students",
+  },
+  {
+    issuer: "Anthropic",
+    name: "Claude Code 101",
+  },
+  {
+    issuer: "Accenture",
+    name: "Reinvention with Agentic AI",
+  },
+  {
+    issuer: "Cisco",
+    name: "Network Addressing and Basic Troubleshooting",
+  },
+  {
+    issuer: "Cisco",
+    name: "Networking Devices and Initial Configuration",
+  },
+  {
+    issuer: "Cisco",
+    name: "Networking Basics",
+  },
+  {
     issuer: "ETS",
     name: "TOEIC 945/990 · English C1",
   },
   {
-    issuer: "Anthropic",
-    name: "Code 101",
-  },
-  {
-    issuer: "Accenture",
-    name: "Partner Badge · Reinvention with Agentic AI",
+    issuer: "MOOC Gestion de Projet",
+    name: "Attestation Parcours Avancé · Session 25",
   },
 ];
 
