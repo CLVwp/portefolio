@@ -25,13 +25,15 @@ export function ExperienceCard({ exp }: { exp: Experience }) {
   const { lang } = useLang();
   // Touch devices have no hover: tap toggles the details zone instead.
   const [open, setOpen] = useState(false);
+  const toggleIfTouch = () => {
+    if (!window.matchMedia("(hover: hover)").matches) setOpen((o) => !o);
+  };
 
   return (
-    <div
-      className="group flex h-full flex-col p-6 transition-colors duration-500 hover:bg-hover md:p-8"
-      onClick={() => {
-        if (!window.matchMedia("(hover: hover)").matches) setOpen((o) => !o);
-      }}
+    <button
+      className="group flex h-full w-full flex-col p-6 text-left transition-colors duration-500 hover:bg-hover md:p-8"
+      onClick={toggleIfTouch}
+      type="button"
     >
       <div className="flex items-center justify-between">
         <CompanyLogo
@@ -69,6 +71,6 @@ export function ExperienceCard({ exp }: { exp: Experience }) {
         motion="wave"
         rows={2}
       />
-    </div>
+    </button>
   );
 }
