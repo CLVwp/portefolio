@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useLang } from "@/components/lang-provider";
+import { PixelMosaic } from "@/components/pixel-mosaic";
 
 const EASE = [0.32, 0.72, 0, 1] as const;
 
@@ -35,6 +36,7 @@ export function Nav() {
             rel="noreferrer"
           >
             <span className="flex items-center px-6 py-4 font-mono text-sm tracking-[0.2em] text-fg transition-colors hover:bg-hover">
+              <PixelMosaic cell={6} className="mr-3" cols={5} rows={5} />
               CV
             </span>
           </Link>
@@ -47,9 +49,7 @@ export function Nav() {
                 <Link
                   className={`flex items-center px-6 font-mono text-xs tracking-[0.2em] uppercase transition-colors hover:bg-hover ${
                     i === 0 ? "border-r border-hairline" : ""
-                  } ${
-                    pathname === link.href ? "text-fg" : "text-fg-muted"
-                  }`}
+                  } ${pathname === link.href ? "text-fg" : "text-fg-muted"}`}
                   href={link.href}
                   key={link.href}
                 >
@@ -151,6 +151,13 @@ export function Nav() {
               initial={{ opacity: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
             >
+              <PixelMosaic
+                cell={16}
+                className="mb-6 opacity-60"
+                cols={16}
+                motion="wave"
+                rows={4}
+              />
               {t.nav.footer}
             </motion.footer>
           </motion.div>

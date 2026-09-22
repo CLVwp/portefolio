@@ -65,7 +65,7 @@ export default function BlogPage() {
               <PixelMosaic
                 cell={28}
                 cols={12}
-                labels={[
+                words={[
                   { text: "NOTES", col: 1, row: 2 },
                   { text: "ANALYSIS", col: 6, row: 7 },
                 ]}
@@ -118,6 +118,13 @@ export default function BlogPage() {
                         </span>
                       </span>
                     </article>
+                    <PixelMosaic
+                      cell={4}
+                      className="mt-6 opacity-0 transition-opacity duration-500 group-hover:opacity-70"
+                      cols={48}
+                      motion="wave"
+                      rows={2}
+                    />
                   </Link>
                 </Reveal>
               ))}
@@ -132,7 +139,10 @@ export default function BlogPage() {
             cell={20}
             className="opacity-60"
             cols={24}
-            labels={[{ text: "CLM · 2026", col: 1, row: 3 }]}
+            words={[
+              { text: "CLM", col: 1, row: 3 },
+              { text: "2026", col: 5, row: 3 },
+            ]}
             rows={6}
           />
           <p className="mt-8 font-mono text-xs tracking-[0.2em] text-fg/30 uppercase">

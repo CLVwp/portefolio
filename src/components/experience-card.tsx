@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CompanyLogo } from "@/components/company-logo";
 import { useLang } from "@/components/lang-provider";
+import { PixelMosaic } from "@/components/pixel-mosaic";
 
 export interface Experience {
   name: string;
@@ -61,6 +62,13 @@ export function ExperienceCard({ exp }: { exp: Experience }) {
           </p>
         </div>
       </div>
+      <PixelMosaic
+        cell={4}
+        className="mt-auto pt-6 opacity-0 transition-opacity duration-500 group-hover:opacity-70"
+        cols={48}
+        motion="wave"
+        rows={2}
+      />
     </div>
   );
 }

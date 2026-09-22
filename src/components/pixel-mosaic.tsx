@@ -45,8 +45,15 @@ interface PixelMosaicProps {
   variant?: MosaicVariant;
   /** pulse: random per-cell rhythm · wave: diagonal sweep */
   motion?: "pulse" | "wave";
-  /** Monospace labels pinned on the grid */
-  labels?: { text: string; col: number; row: number }[];
+  /** Word blocks pinned to the grid: one word = one opaque block spanning
+      as many cells as the text needs (auto-computed from char count) */
+  words?: {
+    text: string;
+    col: number;
+    row: number;
+    /** ghost: bg-bg + hairline border · solid: inverted block */
+    style?: "ghost" | "solid";
+  }[];
   className?: string;
 }
 
@@ -60,7 +67,7 @@ export function PixelMosaic({
   cell = 24,
   variant = "square",
   motion = "pulse",
-  labels = [],
+  words = [],
   className,
 }: PixelMosaicProps) {
   const hex = variant === "hex";
@@ -137,18 +144,31 @@ export function PixelMosaic({
           />
         ),
       )}
-      {labels.map((label) => (
-        <span
-          className="pointer-events-none absolute font-mono text-[10px] tracking-[0.25em] text-fg/70 uppercase"
-          key={label.text}
-          style={{
-            left: label.col * (hex ? hexW : cell) + 4,
-            top: label.row * (hex ? cell * 0.75 : cell) + 4,
-          }}
-        >
-          {label.text}
-        </span>
-      ))}
+      {/* Word blocks: opaque blocks masking the cells underneath.
+          Width = text length * ~8.5px (10px mono + 0.25em tracking) + padding,
+          rounded up to whole cells so blocks stay aligned on the grid. */}
+      {words.map((word) => {
+        const cw = hex ? hexW : cell;
+        const span = Math.max(1, Math.ceil((word.text.length * 8.5 + 16) / cw));
+        return (
+          <span
+            className={`pointer-events-none absolute flex items-center justify-center font-mono text-[10px] tracking-[0.25em] uppercase ${
+              word.style === "solid"
+                ? "bg-fg text-bg"
+                : "border border-hairline bg-bg text-fg/70"
+            }`}
+            key={word.text}
+            style={{
+              left: word.col * cw,
+              top: word.row * (hex ? cell * 0.75 : cell),
+              width: span * cw,
+              height: cell,
+            }}
+          >
+            {word.text}
+          </span>
+        );
+      })}
     </div>
   );
 }

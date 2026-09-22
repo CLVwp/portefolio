@@ -451,7 +451,7 @@ export default function AboutPage() {
               <PixelMosaic
                 cell={28}
                 cols={12}
-                labels={[
+                words={[
                   { text: "ECE PARIS", col: 1, row: 2 },
                   { text: "2022–2027", col: 6, row: 7 },
                 ]}
@@ -607,7 +607,7 @@ export default function AboutPage() {
               <PixelMosaic
                 cell={24}
                 cols={12}
-                labels={[{ text: "CV.PDF", col: 2, row: 3 }]}
+                words={[{ text: "CV.PDF", col: 2, row: 3, style: "solid" }]}
                 rows={8}
               />
             </div>
@@ -621,7 +621,10 @@ export default function AboutPage() {
             cell={20}
             className="opacity-60"
             cols={24}
-            labels={[{ text: "CLM · 2026", col: 1, row: 3 }]}
+            words={[
+              { text: "CLM", col: 1, row: 3 },
+              { text: "2026", col: 5, row: 3 },
+            ]}
             rows={6}
           />
           <p className="mt-8 font-mono text-xs tracking-[0.2em] text-fg/30 uppercase">

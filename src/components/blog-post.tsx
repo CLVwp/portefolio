@@ -134,7 +134,10 @@ export function BlogPost({ slug }: { slug: string }) {
             cell={20}
             className="opacity-60"
             cols={24}
-            labels={[{ text: "CLM · 2026", col: 1, row: 3 }]}
+            words={[
+              { text: "CLM", col: 1, row: 3 },
+              { text: "2026", col: 5, row: 3 },
+            ]}
             rows={6}
           />
           <p className="mt-8 font-mono text-xs tracking-[0.2em] text-fg/30 uppercase">
