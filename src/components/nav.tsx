@@ -17,6 +17,7 @@ export function Nav() {
   const links = [
     { label: t.nav.home, href: "/" },
     { label: t.nav.about, href: "/about" },
+    { label: t.nav.projects, href: "/projects" },
     { label: t.nav.blog, href: "/blog" },
     { label: t.nav.contact, href: "/#contact" },
   ];
@@ -58,10 +59,10 @@ export function Nav() {
               ))}
             </div>
             <div className="flex items-stretch">
-              {links.slice(2).map((link, i) => (
+              {links.slice(2).map((link, i, all) => (
                 <Link
                   className={`flex items-center px-6 font-mono text-xs tracking-[0.2em] uppercase transition-colors hover:bg-hover ${
-                    i === 0 ? "border-r border-hairline" : ""
+                    i < all.length - 1 ? "border-r border-hairline" : ""
                   } ${pathname === link.href ? "text-fg" : "text-fg-muted"}`}
                   href={link.href}
                   key={link.href}

@@ -6,6 +6,7 @@ export const dict = {
     nav: {
       home: "Accueil",
       about: "À propos",
+      projects: "Projets",
       blog: "Blog",
       contact: "Contact",
       menu: "Menu",
@@ -63,11 +64,23 @@ export const dict = {
         Notebook: "Notebook",
       } as Record<string, string>,
     },
+    // Projects
+    projects: {
+      eyebrow: "Projets",
+      title1: "Ce que j'ai",
+      title2: "livré.",
+      subtitle:
+        "Projets perso, prototypes et outils qui tournent. Quand il y a un article de blog, il raconte comment c'est fait.",
+      demo: "Démo live",
+      source: "Code source",
+      article: "Lire l'article",
+    },
   },
   en: {
     nav: {
       home: "Home",
       about: "About",
+      projects: "Projects",
       blog: "Blog",
       contact: "Contact",
       menu: "Menu",
@@ -121,6 +134,16 @@ export const dict = {
         Analyse: "Analysis",
         Notebook: "Notebook",
       } as Record<string, string>,
+    },
+    projects: {
+      eyebrow: "Projects",
+      title1: "What I've",
+      title2: "shipped.",
+      subtitle:
+        "Personal projects, prototypes and tools that run. When there's a blog post, it tells the story of how it's built.",
+      demo: "Live demo",
+      source: "Source code",
+      article: "Read the article",
     },
   },
 } as const;
