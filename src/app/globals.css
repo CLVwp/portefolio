@@ -186,3 +186,28 @@
     @apply font-sans;
   }
 }
+
+/* ─── Mistral-style pixel mosaic ─── */
+@keyframes mosaic-pulse {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.mosaic-cell {
+  animation-name: mosaic-pulse;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  will-change: opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mosaic-cell {
+    animation: none;
+    opacity: 0.4;
+  }
+}

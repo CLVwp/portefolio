@@ -11,7 +11,9 @@ import {
   RingChart,
   XAxis,
 } from "@/components/charts";
+import { useLang } from "@/components/lang-provider";
 import { Nav } from "@/components/nav";
+import { PixelMosaic } from "@/components/pixel-mosaic";
 import { Reveal } from "@/components/reveal";
 
 const EASE = [0.32, 0.72, 0, 1] as const;
@@ -38,42 +40,56 @@ function buildTraffic() {
 const TRAFFIC = buildTraffic();
 
 const SKILLS = [
-  { label: "TypeScript", value: 92, maxValue: 100 },
-  { label: "React", value: 88, maxValue: 100 },
-  { label: "Motion", value: 84, maxValue: 100 },
-  { label: "Node", value: 76, maxValue: 100 },
+  { label: "C / C++", value: 92, maxValue: 100 },
+  { label: "Python", value: 84, maxValue: 100 },
+  { label: "TypeScript", value: 80, maxValue: 100 },
+  { label: "VHDL / ASM", value: 72, maxValue: 100 },
 ];
+
+const EXPERIENCES = ["ACCENTURE", "CEA", "MICROSOFT", "JEECE", "ECE PARIS"];
 
 const PROJECTS = [
   {
-    name: "Aurora Analytics",
-    desc: "Realtime dashboard with 60fps streaming charts",
-    tag: "SaaS",
+    name: "Digital Twin UNS + AI",
+    desc: {
+      fr: "Jumeau de données industriel (UNS) et stack IA locale navigateur — WebAssembly/ONNX, agents LLM autonomes.",
+      en: "Industrial data twin (UNS) and in-browser AI stack — WebAssembly/ONNX, autonomous LLM agents.",
+    },
+    tag: "ACCENTURE",
     span: "md:col-span-7",
   },
   {
-    name: "Mono Studio",
-    desc: "Editorial portfolio for a Paris design agency",
-    tag: "Web",
+    name: "JEECE — Head of IS",
+    desc: {
+      fr: "Direction du SI de la junior-entreprise d'ECE Paris, équipe de 3, conformité RGPD, delivery Agile.",
+      en: "Led the IS of ECE Paris' junior enterprise, team of 3, GDPR compliance, Agile delivery.",
+    },
+    tag: "LEADERSHIP",
     span: "md:col-span-5",
   },
   {
-    name: "Pulse UI",
-    desc: "Open-source motion primitives library",
-    tag: "OSS",
+    name: "Cybersécurité — CEA",
+    desc: {
+      fr: "Immersion S3i : rapports d'incidents, pentesting, gestion de crise.",
+      en: "S3i immersion: incident reports, pentesting, crisis management.",
+    },
+    tag: "SÉCURITÉ",
     span: "md:col-span-5",
   },
   {
-    name: "Ledger OS",
-    desc: "Finance tracking with offline-first sync",
-    tag: "Product",
+    name: "Ce portfolio",
+    desc: {
+      fr: "Next.js 16, Motion, Bklit charts — 60fps, animations physiques, zéro template.",
+      en: "Next.js 16, Motion, Bklit charts — 60fps, physical animations, zero template.",
+    },
+    tag: "WEB",
     span: "md:col-span-7",
   },
 ];
 
 function Eyebrow({ children }: { children: string }) {
   return (
-    <span className="inline-block rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-medium tracking-[0.2em] text-white/60 uppercase">
+    <span className="font-mono text-[10px] tracking-[0.25em] text-white/50 uppercase">
       {children}
     </span>
   );
@@ -82,127 +98,146 @@ function Eyebrow({ children }: { children: string }) {
 function Cta({ label, href }: { label: string; href: string }) {
   return (
     <a
-      className="group inline-flex items-center gap-3 rounded-full bg-white py-2 pr-2 pl-6 text-sm font-medium text-black transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:scale-[1.02] active:scale-[0.98]"
+      className="group inline-flex items-center gap-3 border border-white/20 px-6 py-3 text-sm font-medium text-white transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-white hover:text-black"
       href={href}
     >
       {label}
-      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black/10 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1 group-hover:-translate-y-[1px] group-hover:scale-105">
-        ↗
+      <span className="transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1">
+        →
       </span>
     </a>
   );
 }
 
 export default function Home() {
-  return (
-    <div className="relative min-h-[100dvh] overflow-x-clip bg-[#050505] text-white">
-      {/* Ambient mesh orbs — fixed, GPU-safe */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed top-[-20%] left-[-10%] h-[60vh] w-[60vw] rounded-full opacity-25 blur-[120px]"
-        style={{
-          background: "radial-gradient(circle, #7c3aed 0%, transparent 70%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none fixed right-[-15%] bottom-[-25%] h-[55vh] w-[55vw] rounded-full opacity-20 blur-[120px]"
-        style={{
-          background: "radial-gradient(circle, #10b981 0%, transparent 70%)",
-        }}
-      />
+  const { t, lang } = useLang();
 
+  return (
+    <div className="relative min-h-[100dvh] overflow-x-clip bg-black text-white">
       <Nav />
 
-      <main className="relative mx-auto w-full max-w-6xl px-4 md:px-8">
+      <main>
         {/* ─── Hero ─── */}
-        <section className="flex min-h-[100dvh] flex-col justify-center py-24">
-          <motion.div
-            animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-            initial={{ y: 40, opacity: 0, filter: "blur(8px)" }}
-            transition={{ duration: 0.9, ease: EASE }}
-          >
-            <Eyebrow>Design Engineer — Paris</Eyebrow>
-          </motion.div>
-          <motion.h1
-            animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-            className="mt-8 max-w-4xl text-5xl leading-[1.05] font-medium tracking-tight sm:text-7xl md:text-8xl"
-            initial={{ y: 64, opacity: 0, filter: "blur(12px)" }}
-            transition={{ delay: 0.1, duration: 1, ease: EASE }}
-          >
-            Interfaces with
-            <br />
-            <span className="text-white/40">obsessive motion.</span>
-          </motion.h1>
-          <motion.p
-            animate={{ y: 0, opacity: 1 }}
-            className="mt-8 max-w-md text-lg leading-relaxed text-white/50"
-            initial={{ y: 32, opacity: 0 }}
-            transition={{ delay: 0.25, duration: 0.8, ease: EASE }}
-          >
-            I build products where every pixel has mass and every transition has
-            physics. Currently freelancing, always shipping.
-          </motion.p>
-          <motion.div
-            animate={{ y: 0, opacity: 1 }}
-            className="mt-12"
-            initial={{ y: 24, opacity: 0 }}
-            transition={{ delay: 0.4, duration: 0.8, ease: EASE }}
-          >
-            <Cta href="#work" label="See the work" />
-          </motion.div>
+        <section className="border-b border-white/10">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2">
+            <div className="flex flex-col justify-center border-r border-white/10 p-8 md:p-16">
+              <motion.div
+                animate={{ y: 0, opacity: 1 }}
+                initial={{ y: 24, opacity: 0 }}
+                transition={{ duration: 0.7, ease: EASE }}
+              >
+                <Eyebrow>{t.home.eyebrow}</Eyebrow>
+              </motion.div>
+              <motion.h1
+                animate={{ y: 0, opacity: 1 }}
+                className="mt-8 text-5xl leading-[1.05] font-medium tracking-tight sm:text-6xl"
+                initial={{ y: 48, opacity: 0 }}
+                transition={{ delay: 0.1, duration: 0.9, ease: EASE }}
+              >
+                {t.home.title1}
+                <br />
+                <span className="text-white/40">{t.home.title2}</span>
+              </motion.h1>
+              <motion.p
+                animate={{ y: 0, opacity: 1 }}
+                className="mt-8 max-w-md leading-relaxed text-white/50"
+                initial={{ y: 24, opacity: 0 }}
+                transition={{ delay: 0.25, duration: 0.8, ease: EASE }}
+              >
+                {t.home.subtitle}
+              </motion.p>
+              <motion.div
+                animate={{ y: 0, opacity: 1 }}
+                className="mt-12"
+                initial={{ y: 16, opacity: 0 }}
+                transition={{ delay: 0.4, duration: 0.8, ease: EASE }}
+              >
+                <Cta href="/about" label={t.home.cta} />
+              </motion.div>
+            </div>
+            <div className="relative flex items-center justify-center overflow-hidden p-8 md:p-16">
+              <PixelMosaic
+                cell={28}
+                cols={12}
+                labels={[
+                  { text: "EMBEDDED", col: 1, row: 2 },
+                  { text: "AI / ML", col: 6, row: 5 },
+                ]}
+                rows={10}
+              />
+            </div>
+          </div>
         </section>
 
-        {/* ─── Bento: work ─── */}
-        <section className="py-24 md:py-40" id="work">
-          <Reveal>
-            <Eyebrow>Selected work</Eyebrow>
-          </Reveal>
-
-          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-12">
-            {/* Traffic chart — double-bezel */}
-            <Reveal className="md:col-span-8">
-              <div className="rounded-[2rem] border border-white/10 bg-white/5 p-1.5">
-                <div className="rounded-[calc(2rem-0.375rem)] bg-[#0a0a0a] p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] md:p-8">
-                  <div className="mb-6 flex items-baseline justify-between">
-                    <div>
-                      <p className="text-sm text-white/50">
-                        Site visits — last 90 days
-                      </p>
-                      <p className="mt-1 text-3xl font-semibold tracking-tight">
-                        128,400
-                      </p>
-                    </div>
-                    <span className="rounded-full bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
-                      +24%
+        {/* ─── Expériences — bande style clients ─── */}
+        <section className="border-b border-white/10">
+          <div className="mx-auto max-w-6xl p-8 md:p-16">
+            <Reveal>
+              <Eyebrow>{t.home.workEyebrow}</Eyebrow>
+              <h2 className="mt-4 text-4xl font-medium tracking-tight sm:text-5xl">
+                {t.home.workTitle}
+              </h2>
+            </Reveal>
+            <div className="mt-12 grid grid-cols-2 border-t border-l border-white/10 md:grid-cols-5">
+              {EXPERIENCES.map((name, i) => (
+                <Reveal
+                  className="border-r border-b border-white/10"
+                  delay={i * 0.05}
+                  key={name}
+                >
+                  <div className="flex h-28 items-center justify-center p-4 transition-colors duration-500 hover:bg-white/5">
+                    <span className="text-center font-mono text-xs tracking-[0.2em] text-white/60">
+                      {name}
                     </span>
                   </div>
-                  <AreaChart
-                    animationDuration={1400}
-                    aspectRatio="16 / 7"
-                    data={TRAFFIC}
-                    margin={{ top: 8, right: 8, bottom: 8, left: 8 }}
-                  >
-                    <Area
-                      dataKey="visits"
-                      fill="#7c3aed"
-                      fillOpacity={0.25}
-                      gradientToOpacity={0}
-                      stroke="#a78bfa"
-                      strokeWidth={2}
-                    />
-                    <Grid horizontal numTicksRows={4} strokeOpacity={0.4} />
-                    <ChartTooltip showDatePill={false} />
-                    <XAxis numTicks={4} />
-                  </AreaChart>
-                </div>
-              </div>
-            </Reveal>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            {/* Skills ring — double-bezel */}
-            <Reveal className="md:col-span-4" delay={0.1}>
-              <div className="flex h-full flex-col rounded-[2rem] border border-white/10 bg-white/5 p-1.5">
-                <div className="flex flex-1 flex-col items-center justify-center rounded-[calc(2rem-0.375rem)] bg-[#0a0a0a] p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]">
+        {/* ─── Stats — charts ─── */}
+        <section className="border-b border-white/10">
+          <div className="mx-auto max-w-6xl p-8 md:p-16">
+            <Reveal>
+              <Eyebrow>{t.home.statsEyebrow}</Eyebrow>
+            </Reveal>
+            <div className="mt-12 grid grid-cols-1 border-t border-l border-white/10 md:grid-cols-12">
+              <Reveal className="border-r border-b border-white/10 md:col-span-8">
+                <div className="p-6 md:p-8">
+                  <p className="font-mono text-[10px] tracking-[0.2em] text-white/50 uppercase">
+                    {t.home.visitsLabel}
+                  </p>
+                  <p className="mt-2 text-3xl font-semibold tracking-tight">
+                    128,400
+                  </p>
+                  <div className="mt-6">
+                    <AreaChart
+                      animationDuration={1400}
+                      aspectRatio="16 / 7"
+                      data={TRAFFIC}
+                      margin={{ top: 8, right: 8, bottom: 8, left: 8 }}
+                    >
+                      <Area
+                        dataKey="visits"
+                        fill="#7c3aed"
+                        fillOpacity={0.25}
+                        gradientToOpacity={0}
+                        stroke="#a78bfa"
+                        strokeWidth={2}
+                      />
+                      <Grid horizontal numTicksRows={4} strokeOpacity={0.4} />
+                      <ChartTooltip showDatePill={false} />
+                      <XAxis numTicks={4} />
+                    </AreaChart>
+                  </div>
+                </div>
+              </Reveal>
+              <Reveal
+                className="border-r border-b border-white/10 md:col-span-4"
+                delay={0.1}
+              >
+                <div className="flex h-full flex-col items-center justify-center p-6 md:p-8">
                   <RingChart
                     baseInnerRadius={52}
                     data={SKILLS}
@@ -211,63 +246,108 @@ export default function Home() {
                     {SKILLS.map((skill, i) => (
                       <Ring index={i} key={skill.label} />
                     ))}
-                    <RingCenter defaultLabel="Avg. proficiency" />
+                    <RingCenter defaultLabel={t.home.skillsLabel} />
                   </RingChart>
                 </div>
-              </div>
-            </Reveal>
+              </Reveal>
+            </div>
+          </div>
+        </section>
 
-            {/* Project cards */}
-            {PROJECTS.map((p, i) => (
-              <Reveal className={p.span} delay={i * 0.06} key={p.name}>
-                <div className="group h-full rounded-[2rem] border border-white/10 bg-white/5 p-1.5 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:scale-[1.01]">
-                  <div className="flex h-full min-h-44 flex-col justify-between rounded-[calc(2rem-0.375rem)] bg-[#0a0a0a] p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] md:p-8">
+        {/* ─── Projets — grille stricte ─── */}
+        <section className="border-b border-white/10">
+          <div className="mx-auto max-w-6xl p-8 md:p-16">
+            <Reveal>
+              <Eyebrow>{t.home.projectsEyebrow}</Eyebrow>
+              <h2 className="mt-4 text-4xl font-medium tracking-tight sm:text-5xl">
+                {t.home.projectsTitle}
+              </h2>
+            </Reveal>
+            <div className="mt-12 grid grid-cols-1 border-t border-l border-white/10 md:grid-cols-12">
+              {PROJECTS.map((p, i) => (
+                <Reveal
+                  className={`border-r border-b border-white/10 ${p.span}`}
+                  delay={i * 0.06}
+                  key={p.name}
+                >
+                  <div className="group flex h-full min-h-44 flex-col justify-between p-6 transition-colors duration-500 hover:bg-white/5 md:p-8">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] tracking-[0.2em] text-white/40 uppercase">
+                      <span className="font-mono text-[10px] tracking-[0.2em] text-white/40">
                         {p.tag}
                       </span>
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-xs transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1 group-hover:-translate-y-[1px]">
-                        ↗
+                      <span className="text-white/40 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1">
+                        →
                       </span>
                     </div>
                     <div>
                       <h3 className="text-xl font-medium tracking-tight md:text-2xl">
                         {p.name}
                       </h3>
-                      <p className="mt-2 text-sm text-white/50">{p.desc}</p>
+                      <p className="mt-2 text-sm text-white/50">
+                        {p.desc[lang]}
+                      </p>
                     </div>
                   </div>
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* ─── Contact ─── */}
-        <section
-          className="flex flex-col items-start py-24 md:py-40"
-          id="contact"
-        >
-          <Reveal>
-            <Eyebrow>Contact</Eyebrow>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="mt-8 max-w-3xl text-4xl leading-tight font-medium tracking-tight sm:text-6xl">
-              Have something worth building?
-            </h2>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div className="mt-12">
-              <Cta href="mailto:hello@example.com" label="hello@example.com" />
+        <section className="border-b border-white/10" id="contact">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2">
+            <div className="flex flex-col items-start justify-center border-r border-white/10 p-8 md:p-16">
+              <Reveal>
+                <Eyebrow>{t.home.contactEyebrow}</Eyebrow>
+                <h2 className="mt-4 max-w-md text-4xl leading-tight font-medium tracking-tight sm:text-5xl">
+                  {t.home.contactTitle}
+                </h2>
+                <div className="mt-12 flex flex-wrap gap-4">
+                  <Cta
+                    href="mailto:viellardclement@gmail.com"
+                    label="viellardclement@gmail.com"
+                  />
+                  <a
+                    className="group inline-flex items-center gap-3 border border-white/20 px-6 py-3 text-sm font-medium text-white transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-white hover:text-black"
+                    href="https://www.linkedin.com/in/clement-viellard/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    LinkedIn
+                    <span className="transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1">
+                      ↗
+                    </span>
+                  </a>
+                </div>
+              </Reveal>
             </div>
-          </Reveal>
+            <div className="relative flex items-center justify-center overflow-hidden p-8 md:p-16">
+              <PixelMosaic
+                cell={24}
+                cols={12}
+                labels={[{ text: "GET IN TOUCH", col: 2, row: 4 }]}
+                rows={8}
+              />
+            </div>
+          </div>
         </section>
       </main>
 
-      <footer className="relative border-t border-white/5 py-10">
-        <p className="mx-auto max-w-6xl px-4 text-xs tracking-[0.2em] text-white/30 uppercase md:px-8">
-          © 2026 — Built with Next.js, Motion & Bklit
-        </p>
+      {/* ─── Footer ─── */}
+      <footer className="relative overflow-hidden">
+        <div className="mx-auto max-w-6xl p-8 md:p-16">
+          <PixelMosaic
+            cell={20}
+            className="opacity-60"
+            cols={24}
+            labels={[{ text: "CLM — 2026", col: 1, row: 3 }]}
+            rows={6}
+          />
+          <p className="mt-8 font-mono text-xs tracking-[0.2em] text-white/30 uppercase">
+            {t.home.footer}
+          </p>
+        </div>
       </footer>
     </div>
   );
