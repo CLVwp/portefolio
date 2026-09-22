@@ -2,6 +2,8 @@
 
 ## Tooling
 - Always bun, never npm/npx: `bun install`, `bun run build`, `bun dev`, `bunx`.
+- `bun run lint` (biome), `bun run typecheck` (tsc); `bun run validate` runs biome + tsc + `scripts/check-chars.ts`.
+- Deploy: `bun run deploy` = build + `bunx wrangler deploy` to Cloudflare Workers (config: `wrangler.jsonc`).
 - Never write the em dash `—` (U+2014) anywhere in the repo. Enforced by `bun run validate` via `scripts/check-chars.ts`. In UI text use `·` for separators, `–` (U+2013) for date ranges, commas/colons for prose.
 
 ## Styling
@@ -12,6 +14,7 @@
 - Design invariant: all pages share a central vertical hairline at exactly 50% of `max-w-6xl` (hero/contact `grid-cols-2` dividers). The nav's middle border must continue that axis: header is `grid-cols-[1fr_auto_1fr]`, nav split `md:grid-cols-2`. After touching nav/layout, verify delta = 0px (header border x vs section divider x).
 
 ## Content
+- All UI strings are FR + EN pairs in `src/lib/i18n.ts`; never hardcode user-visible text.
 - Descriptions (`src/lib/experiences.ts`, `/about` timeline) render with `whitespace-pre-line`: `\n` = line break, `\n\n` = paragraph break; each string (`fr`/`en`) carries its own breaks.
 
 ## Environment
