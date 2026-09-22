@@ -13,6 +13,7 @@ export const project: Project = {
   year: "2026",
   stack: ["Bun", "Hono", "MapLibre", "SSE"],
   links: {
+    demo: "https://worldpulse.clementviellard.com",
     source: "https://github.com/CLVwp/WorldPulse",
   },
 };
