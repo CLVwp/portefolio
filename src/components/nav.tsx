@@ -43,9 +43,11 @@ export function Nav() {
               continues the pages' central hairline (50% of max-w-6xl) exactly. */}
           <nav className="hidden items-stretch md:grid md:grid-cols-2">
             <div className="flex items-stretch justify-end border-r border-hairline">
-              {links.slice(0, 2).map((link) => (
+              {links.slice(0, 2).map((link, i) => (
                 <Link
                   className={`flex items-center px-6 font-mono text-xs tracking-[0.2em] uppercase transition-colors hover:bg-hover ${
+                    i === 0 ? "border-r border-hairline" : ""
+                  } ${
                     pathname === link.href ? "text-fg" : "text-fg-muted"
                   }`}
                   href={link.href}
