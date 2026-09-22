@@ -1,0 +1,12 @@
+// Cloudflare Workers static-assets-only deploy: serves the Next.js static
+// export in out/. No server code, no bundled Worker script.
+{
+  "name": "portefolio",
+  "compatibility_date": "2026-09-22",
+  "assets": {
+    "directory": "./out",
+    // Every route is prerendered (generateStaticParams on /blog/[slug]),
+    // so unmatched URLs are genuine 404s: serve out/404.html.
+    "not_found_handling": "404-page"
+  }
+}

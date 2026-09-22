@@ -195,7 +195,7 @@
 
 /* ─── Theme tokens (light, off-white) ─── */
 :root {
-  --bg: #f5f2ec;
+  --bg: #eae5da;
   --fg: #0a0a0a;
   --fg-muted: rgb(0 0 0 / 55%);
   --fg-faint: rgb(0 0 0 / 35%);

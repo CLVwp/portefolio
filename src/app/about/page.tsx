@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import type { CSSProperties } from "react";
-import { Ring, RingCenter, RingChart } from "@/components/charts";
+import { type CSSProperties, useState } from "react";
 import { CompanyLogo } from "@/components/company-logo";
 import { ExperienceCard } from "@/components/experience-card";
 import { useLang } from "@/components/lang-provider";
@@ -10,6 +9,7 @@ import { Nav } from "@/components/nav";
 import { PixelMosaic } from "@/components/pixel-mosaic";
 import { Reveal } from "@/components/reveal";
 import { EXPERIENCES } from "@/lib/experiences";
+import type { Lang } from "@/lib/i18n";
 
 const EASE = [0.32, 0.72, 0, 1] as const;
 
@@ -73,6 +73,90 @@ function tagStyle(tag: string): CSSProperties {
     borderColor: `hsl(${hue} 65% 55% / 0.45)`,
     color: `hsl(${hue} 65% 30%)`,
   };
+}
+
+/** EN labels; keys are the canonical FR badge names. Unlisted = same in both. */
+const TAG_EN: Record<string, string> = {
+  "Développement de logiciels": "Software Development",
+  "C (langage de programmation)": "C (Programming Language)",
+  "Python (langage de programmation)": "Python (Programming Language)",
+  Électronique: "Electronics",
+  "Électronique analogique": "Analog Electronics",
+  "Électronique numérique": "Digital Electronics",
+  "Conception hardware": "Hardware Design",
+  "Prototype FPGA": "FPGA Prototype",
+  "Réseau de portes programmables (FPGA)":
+    "Field-Programmable Gate Array (FPGA)",
+  Microcontrôleurs: "Microcontrollers",
+  "Architecture informatique": "Computer Architecture",
+  "Systèmes d'exploitation temps réel (RTOS)":
+    "Real-Time Operating Systems (RTOS)",
+  "Programmation parallèle": "Parallel Programming",
+  "Traitement numérique du signal": "Digital Signal Processing",
+  "Pilote de périphérique Linux": "Linux Device Drivers",
+  "Système Linux intégré": "Embedded Linux",
+  Cybersécurité: "Cybersecurity",
+  "Informatique quantique": "Quantum Computing",
+  Robotique: "Robotics",
+  "Intelligence Artificielle": "Artificial Intelligence",
+  "Ingénierie des systèmes basée sur les modèles (MBSE)":
+    "Model-Based Systems Engineering (MBSE)",
+  "Gestion de projet logiciel": "Software Project Management",
+  "Gestion de projet": "Project Management",
+  "Présentations de groupe": "Group Presentations",
+  Anglais: "English",
+  "Analyse & Algèbre 1,2,3": "Analysis & Algebra 1,2,3",
+  "Mécanique du point matériel": "Particle Mechanics",
+  Mécanique: "Mechanics",
+  Microprocesseur: "Microprocessor",
+  "Gestion d'entreprise": "Business Management",
+  "Machine learning": "Machine Learning",
+  "Économie internationale": "International Economics",
+  Maths: "Mathematics",
+  "Physique-Chimie": "Physics-Chemistry",
+  SVT: "Earth & Life Sciences",
+  "Maths Expertes": "Expert Mathematics",
+};
+
+const COLLAPSED_TAGS = 12;
+
+/** Badge list, collapsed past COLLAPSED_TAGS with a see-more toggle. */
+function TagList({
+  lang,
+  seeLess,
+  seeMore,
+  tags,
+}: {
+  lang: Lang;
+  seeLess: string;
+  seeMore: string;
+  tags: string[];
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const visible = expanded ? tags : tags.slice(0, COLLAPSED_TAGS);
+  const hidden = tags.length - visible.length;
+  return (
+    <div className="flex flex-wrap gap-2 md:justify-end">
+      {visible.map((tag) => (
+        <span
+          className="border px-3 py-1 font-mono text-[10px] tracking-[0.15em]"
+          key={tag}
+          style={tagStyle(tag)}
+        >
+          {lang === "en" ? (TAG_EN[tag] ?? tag) : tag}
+        </span>
+      ))}
+      {hidden > 0 && (
+        <button
+          className="border border-hairline px-3 py-1 font-mono text-[10px] tracking-[0.15em] text-fg-muted transition-colors hover:text-fg"
+          onClick={() => setExpanded(!expanded)}
+          type="button"
+        >
+          {expanded ? seeLess : `${seeMore} (+${hidden})`}
+        </button>
+      )}
+    </div>
+  );
 }
 
 const TIMELINE: {
@@ -146,10 +230,12 @@ const TIMELINE: {
       en: "One-semester academic exchange: microprocessors, business management, machine learning, international economics, project management.",
     },
     tags: [
-      "Microprocessors",
-      "ML",
-      "Project Management",
+      "Microprocesseur",
+      "Gestion d'entreprise",
+      "Machine learning",
       "Économie internationale",
+      "Gestion de projet",
+      "Électronique",
     ],
   },
   {
@@ -169,45 +255,123 @@ const TIMELINE: {
 
 const CERTS = [
   {
-    issuer: "Anthropic & Accenture",
-    name: "Code 101 · Partner Badge · Reinvention with Agentic AI",
-  },
-  {
     issuer: "ETS",
     name: "TOEIC 945/990 · English C1",
   },
-];
-
-const SUBJECTS = [
   {
-    name: {
-      fr: "Systèmes embarqués & temps réel",
-      en: "Embedded & real-time systems",
-    },
-    level: 92,
+    issuer: "Anthropic",
+    name: "Code 101",
   },
   {
-    name: {
-      fr: "Microprocesseurs & architecture",
-      en: "Microprocessors & architecture",
-    },
-    level: 88,
-  },
-  { name: { fr: "Machine learning", en: "Machine learning" }, level: 84 },
-  { name: { fr: "Génie logiciel", en: "Software engineering" }, level: 86 },
-  { name: { fr: "Gestion de projet", en: "Project management" }, level: 78 },
-  {
-    name: { fr: "Business & économie", en: "Business & economics" },
-    level: 72,
+    issuer: "Accenture",
+    name: "Partner Badge · Reinvention with Agentic AI",
   },
 ];
 
-const SKILLS = [
-  { label: "C / C++", value: 92, maxValue: 100 },
-  { label: "Python", value: 84, maxValue: 100 },
-  { label: "TypeScript", value: 80, maxValue: 100 },
-  { label: "VHDL / ASM", value: 72, maxValue: 100 },
-];
+/** Badge mindmap: root domain -> branches -> the ECE badges, grouped. */
+const MINDMAP: {
+  root: { fr: string; en: string };
+  branches: { name: { fr: string; en: string }; tags: string[] }[];
+} = {
+  root: { fr: "Systèmes embarqués & IA", en: "Embedded Systems & AI" },
+  branches: [
+    {
+      name: { fr: "Langages & logiciel", en: "Languages & software" },
+      tags: [
+        "Développement de logiciels",
+        "C++",
+        "C (langage de programmation)",
+        "Python (langage de programmation)",
+        "Java",
+        "TypeScript",
+        "Programmation parallèle",
+      ],
+    },
+    {
+      name: { fr: "Firmware & systèmes", en: "Firmware & systems" },
+      tags: [
+        "Microcontrôleurs",
+        "Firmware",
+        "Systèmes d'exploitation temps réel (RTOS)",
+        "Système Linux intégré",
+        "Pilote de périphérique Linux",
+        "Linux",
+        "Architecture informatique",
+      ],
+    },
+    {
+      name: { fr: "Électronique & hardware", en: "Electronics & hardware" },
+      tags: [
+        "Électronique",
+        "Électronique analogique",
+        "Électronique numérique",
+        "Conception hardware",
+        "Réseau de portes programmables (FPGA)",
+        "Prototype FPGA",
+        "VHDL",
+      ],
+    },
+    {
+      name: { fr: "IA, signal & sécurité", en: "AI, signal & security" },
+      tags: [
+        "Intelligence Artificielle",
+        "ML",
+        "Traitement numérique du signal",
+        "Informatique quantique",
+        "Cybersécurité",
+      ],
+    },
+    {
+      name: { fr: "Sciences & méthodes", en: "Science & methods" },
+      tags: [
+        "Ingénierie des systèmes basée sur les modèles (MBSE)",
+        "Robotique",
+        "Gestion de projet logiciel",
+        "Gestion de projet",
+        "Présentations de groupe",
+        "Anglais",
+        "Analyse & Algèbre 1,2,3",
+        "Mécanique du point matériel",
+        "Mécanique",
+      ],
+    },
+  ],
+};
+
+/** True tree: root pill left, spine, one tick per branch, badges as leaves. */
+function Mindmap({ lang }: { lang: Lang }) {
+  return (
+    <div className="flex flex-col md:flex-row md:items-stretch">
+      <div className="relative flex items-center justify-center md:pr-8">
+        <span className="bg-fg px-4 py-2 text-center font-mono text-xs tracking-[0.2em] text-bg uppercase">
+          {MINDMAP.root[lang]}
+        </span>
+        <span className="absolute top-1/2 hidden h-px w-8 bg-hairline md:right-0 md:block" />
+      </div>
+      <div className="mt-5 space-y-6 md:mt-0 md:flex-1 md:border-l md:border-hairline md:pl-0">
+        {MINDMAP.branches.map((branch) => (
+          <div className="relative md:pl-6" key={branch.name.fr}>
+            <span className="absolute left-0 top-[11px] hidden h-px w-6 bg-hairline md:block" />
+            <p className="font-mono text-[10px] tracking-[0.2em] text-fg-muted uppercase">
+              {branch.name[lang]}
+            </p>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {branch.tags.map((tag) => (
+                <span
+                  className="border px-2 py-0.5 font-mono text-[10px] tracking-[0.1em]"
+                  key={tag}
+                  style={tagStyle(tag)}
+                >
+                  {lang === "en" ? (TAG_EN[tag] ?? tag) : tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function Eyebrow({ children }: { children: string }) {
   return (
@@ -300,17 +464,12 @@ export default function AboutPage() {
                         {item.desc[lang]}
                       </p>
                     </div>
-                    <div className="flex flex-wrap gap-2 md:justify-end">
-                      {item.tags.map((tag) => (
-                        <span
-                          className="border px-3 py-1 font-mono text-[10px] tracking-[0.15em]"
-                          key={tag}
-                          style={tagStyle(tag)}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                    <TagList
+                      lang={lang}
+                      seeLess={t.about.seeLess}
+                      seeMore={t.about.seeMore}
+                      tags={item.tags}
+                    />
                   </div>
                 </Reveal>
               ))}
@@ -324,57 +483,10 @@ export default function AboutPage() {
             <Reveal>
               <Eyebrow>{t.about.subjectsEyebrow}</Eyebrow>
             </Reveal>
-            <div className="mt-12 grid grid-cols-1 border-t border-l border-hairline md:grid-cols-12">
-              <Reveal className="border-r border-b border-hairline md:col-span-7">
+            <div className="mt-12 border-t border-l border-hairline">
+              <Reveal className="border-r border-b border-hairline">
                 <div className="p-6 md:p-8">
-                  <h3 className="font-mono text-[10px] tracking-[0.2em] text-fg-muted uppercase">
-                    {t.about.subjectsLabel}
-                  </h3>
-                  <div className="mt-8 space-y-6">
-                    {SUBJECTS.map((subject, i) => (
-                      <div key={subject.name.en}>
-                        <div className="flex items-baseline justify-between">
-                          <span className="text-sm text-fg/80">
-                            {subject.name[lang]}
-                          </span>
-                          <span className="font-mono text-xs text-fg/40 tabular-nums">
-                            {subject.level}%
-                          </span>
-                        </div>
-                        <div className="mt-2 h-1 bg-fg/10">
-                          <motion.div
-                            className="h-full origin-left bg-gradient-to-r from-violet-500 to-emerald-400"
-                            initial={{ scaleX: 0 }}
-                            style={{ width: `${subject.level}%` }}
-                            transition={{
-                              delay: 0.2 + i * 0.08,
-                              duration: 1,
-                              ease: EASE,
-                            }}
-                            viewport={{ once: true }}
-                            whileInView={{ scaleX: 1 }}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Reveal>
-              <Reveal
-                className="border-r border-b border-hairline md:col-span-5"
-                delay={0.1}
-              >
-                <div className="flex h-full flex-col items-center justify-center p-6 md:p-8">
-                  <RingChart
-                    baseInnerRadius={52}
-                    data={SKILLS}
-                    strokeWidth={10}
-                  >
-                    {SKILLS.map((skill, i) => (
-                      <Ring index={i} key={skill.label} />
-                    ))}
-                    <RingCenter defaultLabel={t.about.skillsLabel} />
-                  </RingChart>
+                  <Mindmap lang={lang} />
                 </div>
               </Reveal>
             </div>
@@ -387,7 +499,7 @@ export default function AboutPage() {
             <Reveal>
               <Eyebrow>{t.about.certEyebrow}</Eyebrow>
             </Reveal>
-            <div className="mt-12 grid grid-cols-1 border-t border-l border-hairline md:grid-cols-2">
+            <div className="mt-12 grid grid-cols-1 border-t border-l border-hairline md:grid-cols-3">
               {CERTS.map((cert, i) => (
                 <Reveal
                   className="border-r border-b border-hairline"
