@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import type { CSSProperties } from "react";
 import { Ring, RingCenter, RingChart } from "@/components/charts";
 import { CompanyLogo } from "@/components/company-logo";
 import { ExperienceCard } from "@/components/experience-card";
@@ -11,6 +12,68 @@ import { Reveal } from "@/components/reveal";
 import { EXPERIENCES } from "@/lib/experiences";
 
 const EASE = [0.32, 0.72, 0, 1] as const;
+
+/** Every badge name, so each gets its own hue (golden-angle spread). */
+const ALL_TAGS = [
+  "Développement de logiciels",
+  "C++",
+  "C (langage de programmation)",
+  "Python (langage de programmation)",
+  "Java",
+  "TypeScript",
+  "VHDL",
+  "Linux",
+  "Électronique",
+  "Électronique analogique",
+  "Électronique numérique",
+  "Conception hardware",
+  "Prototype FPGA",
+  "Réseau de portes programmables (FPGA)",
+  "Microcontrôleurs",
+  "Firmware",
+  "Architecture informatique",
+  "Systèmes d'exploitation temps réel (RTOS)",
+  "Programmation parallèle",
+  "Traitement numérique du signal",
+  "Pilote de périphérique Linux",
+  "Système Linux intégré",
+  "Cybersécurité",
+  "Informatique quantique",
+  "Robotique",
+  "Intelligence Artificielle",
+  "ML",
+  "Ingénierie des systèmes basée sur les modèles (MBSE)",
+  "Développement de logiciels",
+  "Gestion de projet logiciel",
+  "Gestion de projet",
+  "Présentations de groupe",
+  "Anglais",
+  "Analyse & Algèbre 1,2,3",
+  "Mécanique du point matériel",
+  "Mécanique",
+  "Microprocesseur",
+  "Gestion d'entreprise",
+  "Machine learning",
+  "Économie internationale",
+  "Maths",
+  "Physique-Chimie",
+  "SVT",
+  "Maths Expertes",
+];
+
+/** Unique color per badge: border + text share the hue, spread evenly. */
+function tagStyle(tag: string): CSSProperties {
+  let hue = ALL_TAGS.indexOf(tag) * 137.508;
+  if (hue < 0) {
+    let h = 0;
+    for (const c of tag) h = (h * 31 + c.charCodeAt(0)) % 360;
+    hue = h;
+  }
+  return {
+    borderColor: `hsl(${hue} 65% 55% / 0.45)`,
+    color: `hsl(${hue} 65% 30%)`,
+  };
+}
 
 const TIMELINE: {
   period: string;
@@ -32,7 +95,43 @@ const TIMELINE: {
       fr: "Spécialisation Systèmes Embarqués (Aéronautique & Espace), filière internationale. Cours : systèmes embarqués, microprocesseurs, temps réel, machine learning, génie logiciel, gestion de projet.",
       en: "Embedded Systems specialization (Aeronautics & Space), international track. Coursework: embedded systems, microprocessors, real-time, machine learning, software engineering, project management.",
     },
-    tags: ["EMBEDDED", "MICROPROCESSORS", "REAL-TIME", "ML"],
+    tags: [
+      "Développement de logiciels",
+      "C++",
+      "C (langage de programmation)",
+      "Python (langage de programmation)",
+      "Java",
+      "TypeScript",
+      "VHDL",
+      "Linux",
+      "Électronique",
+      "Électronique analogique",
+      "Électronique numérique",
+      "Conception hardware",
+      "Prototype FPGA",
+      "Réseau de portes programmables (FPGA)",
+      "Microcontrôleurs",
+      "Firmware",
+      "Architecture informatique",
+      "Systèmes d'exploitation temps réel (RTOS)",
+      "Programmation parallèle",
+      "Traitement numérique du signal",
+      "Pilote de périphérique Linux",
+      "Système Linux intégré",
+      "Cybersécurité",
+      "Informatique quantique",
+      "Robotique",
+      "Intelligence Artificielle",
+      "ML",
+      "Ingénierie des systèmes basée sur les modèles (MBSE)",
+      "Gestion de projet logiciel",
+      "Gestion de projet",
+      "Présentations de groupe",
+      "Anglais",
+      "Analyse & Algèbre 1,2,3",
+      "Mécanique du point matériel",
+      "Mécanique",
+    ],
   },
   {
     period: "2024–2025",
@@ -46,7 +145,12 @@ const TIMELINE: {
       fr: "Échange académique d'un semestre : microprocesseurs, business management, machine learning, économie internationale, gestion de projet.",
       en: "One-semester academic exchange: microprocessors, business management, machine learning, international economics, project management.",
     },
-    tags: ["MICROPROCESSORS", "ML", "MANAGEMENT"],
+    tags: [
+      "Microprocessors",
+      "ML",
+      "Project Management",
+      "Économie internationale",
+    ],
   },
   {
     period: "2019–2022",
@@ -59,7 +163,18 @@ const TIMELINE: {
       fr: "Bac général avec spécialités mathématiques, physique-chimie et sciences de la vie et de la Terre (SVT), option maths expertes en terminale.",
       en: "General baccalauréat with mathematics, physics-chemistry and earth & life sciences (SVT) specializations, expert maths option in final year.",
     },
-    tags: ["MATHS", "PHYSIQUE-CHIMIE", "SVT", "MATHS EXPERTES"],
+    tags: ["Maths", "Physique-Chimie", "SVT", "Maths Expertes"],
+  },
+];
+
+const CERTS = [
+  {
+    issuer: "Anthropic & Accenture",
+    name: "Code 101 · Partner Badge · Reinvention with Agentic AI",
+  },
+  {
+    issuer: "ETS",
+    name: "TOEIC 945/990 · English C1",
   },
 ];
 
@@ -133,7 +248,7 @@ export default function AboutPage() {
               </motion.h1>
               <motion.p
                 animate={{ y: 0, opacity: 1 }}
-                className="mt-8 max-w-xl leading-relaxed text-fg-muted"
+                className="mt-8 max-w-xl leading-relaxed whitespace-pre-line text-fg-muted"
                 initial={{ y: 24, opacity: 0 }}
                 transition={{ delay: 0.25, duration: 0.8, ease: EASE }}
               >
@@ -188,8 +303,9 @@ export default function AboutPage() {
                     <div className="flex flex-wrap gap-2 md:justify-end">
                       {item.tags.map((tag) => (
                         <span
-                          className="border border-violet-500/40 px-3 py-1 font-mono text-[10px] tracking-[0.15em] text-fg-muted"
+                          className="border px-3 py-1 font-mono text-[10px] tracking-[0.15em]"
                           key={tag}
+                          style={tagStyle(tag)}
                         >
                           {tag}
                         </span>
@@ -261,6 +377,33 @@ export default function AboutPage() {
                   </RingChart>
                 </div>
               </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── Certifications ─── */}
+        <section className="border-b border-hairline">
+          <div className="mx-auto max-w-6xl p-8 md:p-16">
+            <Reveal>
+              <Eyebrow>{t.about.certEyebrow}</Eyebrow>
+            </Reveal>
+            <div className="mt-12 grid grid-cols-1 border-t border-l border-hairline md:grid-cols-2">
+              {CERTS.map((cert, i) => (
+                <Reveal
+                  className="border-r border-b border-hairline"
+                  delay={i * 0.08}
+                  key={cert.name}
+                >
+                  <div className="p-6 transition-colors duration-500 hover:bg-hover md:p-8">
+                    <p className="font-mono text-[10px] tracking-[0.2em] text-fg/40 uppercase">
+                      {cert.issuer}
+                    </p>
+                    <h3 className="mt-3 text-xl font-medium tracking-tight md:text-2xl">
+                      {cert.name}
+                    </h3>
+                  </div>
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>

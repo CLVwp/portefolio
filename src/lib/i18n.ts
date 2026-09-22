@@ -34,8 +34,9 @@ export const dict = {
       title1: "Ingénieur par formation,",
       title2: "curieux par obsession.",
       subtitle:
-        "Je m'appelle Clément Viellard. Étudiant ingénieur à ECE Paris, spécialisé en systèmes embarqués (aéronautique & espace). Ce qui me motive : comprendre comment les systèmes tiennent debout, du microprocesseur au produit, puis les rendre agréables à utiliser.",
+        "Je m'appelle Clément Viellard. Étudiant ingénieur à ECE Paris, spécialisé en systèmes embarqués (aéronautique & espace).\nCe qui me motive : comprendre comment les systèmes tiennent debout, du microprocesseur au produit, puis les rendre agréables à utiliser.",
       timelineEyebrow: "Parcours académique",
+      certEyebrow: "Certifications",
       subjectsEyebrow: "Matières & compétences",
       subjectsLabel: "Matières fortes",
       skillsLabel: "Stack technique",
@@ -93,8 +94,9 @@ export const dict = {
       title1: "Engineer by training,",
       title2: "curious by obsession.",
       subtitle:
-        "I'm Clément Viellard. Engineering student at ECE Paris, specialized in embedded systems (aeronautics & space). What drives me: understanding how systems hold together, from the microprocessor to the product, then making them pleasant to use.",
+        "I'm Clément Viellard. Engineering student at ECE Paris, specialized in embedded systems (aeronautics & space).\nWhat drives me: understanding how systems hold together, from the microprocessor to the product, then making them pleasant to use.",
       timelineEyebrow: "Academic journey",
+      certEyebrow: "Certifications",
       subjectsEyebrow: "Subjects & skills",
       subjectsLabel: "Strong subjects",
       skillsLabel: "Technical stack",

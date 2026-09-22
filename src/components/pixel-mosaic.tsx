@@ -17,6 +17,23 @@ function hashFract(n: number): number {
   return x - Math.floor(x);
 }
 
+export type MosaicVariant = "square" | "diamond" | "triangle" | "hex";
+
+const CLIP_PATHS: Record<MosaicVariant, string | undefined> = {
+  square: undefined,
+  diamond: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
+  triangle: "polygon(50% 0%, 100% 100%, 0% 100%)",
+  hex: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+};
+
+/** Fraction of the cell each shape fills (hex does its own geometry) */
+const SHAPE_SCALE: Record<MosaicVariant, number> = {
+  square: 1,
+  diamond: 0.8,
+  triangle: 0.9,
+  hex: 1,
+};
+
 interface PixelMosaicProps {
   /** Grid columns */
   cols?: number;
@@ -24,22 +41,31 @@ interface PixelMosaicProps {
   rows?: number;
   /** Cell size in px */
   cell?: number;
+  /** Cell shape */
+  variant?: MosaicVariant;
+  /** pulse: random per-cell rhythm · wave: diagonal sweep */
+  motion?: "pulse" | "wave";
   /** Monospace labels pinned on the grid */
   labels?: { text: string; col: number; row: number }[];
   className?: string;
 }
 
 /**
- * Mistral-style pixel mosaic: a grid of squares pulsing between accent
- * colors and transparency. Pure CSS animations, GPU-safe (opacity only).
+ * Mistral-style pixel mosaic: a grid of cells pulsing between accent colors
+ * and transparency. Pure CSS animations, GPU-safe (opacity only).
  */
 export function PixelMosaic({
   cols = 24,
   rows = 8,
   cell = 24,
+  variant = "square",
+  motion = "pulse",
   labels = [],
   className,
 }: PixelMosaicProps) {
+  const hex = variant === "hex";
+  const hexW = cell * 0.866;
+
   const cells = useMemo(
     () =>
       Array.from({ length: cols * rows }, (_, i) => {
@@ -47,43 +73,77 @@ export function PixelMosaic({
         const row = Math.floor(i / cols);
         const seed = hashFract(i * 12.9898 + 1);
         const color = COLORS[Math.floor(seed * COLORS.length)];
-        const delay = (hashFract(i * 78.233) * 6).toFixed(2);
-        const duration = (4 + hashFract(i * 39.425) * 4).toFixed(2);
-        return { col, row, color, delay, duration, i };
+        const delay =
+          motion === "wave"
+            ? ((col + row) / (cols + rows - 2)) * 3
+            : hashFract(i * 78.233) * 6;
+        const duration = motion === "wave" ? 4 : 4 + hashFract(i * 39.425) * 4;
+
+        return {
+          i,
+          color,
+          delay: `${delay.toFixed(2)}s`,
+          duration: `${duration.toFixed(2)}s`,
+          // weave: alternate triangles point up/down
+          flip: variant === "triangle" && (col + row) % 2 === 1,
+          // hex rows pack at 75% height, odd rows shift half a tile
+          left: hex ? col * hexW + (row % 2 ? hexW / 2 : 0) : undefined,
+          top: hex ? row * cell * 0.75 : undefined,
+          width: hex ? hexW : cell * SHAPE_SCALE[variant],
+          height: hex ? cell : cell * SHAPE_SCALE[variant],
+        };
       }),
-    [cols, rows],
+    [cols, rows, cell, variant, motion, hex, hexW],
   );
 
   return (
     <div
       aria-hidden
       className={`relative select-none overflow-hidden ${className ?? ""}`}
-      style={{
-        display: "grid",
-        gridTemplateColumns: `repeat(${cols}, ${cell}px)`,
-        gridTemplateRows: `repeat(${rows}, ${cell}px)`,
-      }}
+      style={
+        hex
+          ? {
+              width: cols * hexW + hexW / 2,
+              height: cell + (rows - 1) * cell * 0.75,
+            }
+          : {
+              display: "grid",
+              gridTemplateColumns: `repeat(${cols}, ${cell}px)`,
+              gridTemplateRows: `repeat(${rows}, ${cell}px)`,
+            }
+      }
     >
-      {cells.map(({ color, delay, duration, i }) => (
-        <div
-          className="mosaic-cell"
-          key={i}
-          style={
-            {
-              backgroundColor: color,
-              animationDelay: `${delay}s`,
-              animationDuration: `${duration}s`,
-            } as React.CSSProperties
-          }
-        />
-      ))}
+      {cells.map(
+        ({ color, delay, duration, flip, left, top, width, height, i }) => (
+          <div
+            className="mosaic-cell"
+            key={i}
+            style={
+              {
+                position: hex ? "absolute" : "relative",
+                left,
+                top,
+                width,
+                height,
+                justifySelf: "center",
+                alignSelf: "center",
+                backgroundColor: color,
+                clipPath: CLIP_PATHS[variant],
+                transform: flip ? "rotate(180deg)" : undefined,
+                animationDelay: delay,
+                animationDuration: duration,
+              } as React.CSSProperties
+            }
+          />
+        ),
+      )}
       {labels.map((label) => (
         <span
           className="pointer-events-none absolute font-mono text-[10px] tracking-[0.25em] text-fg/70 uppercase"
           key={label.text}
           style={{
-            left: label.col * cell + 4,
-            top: label.row * cell + 4,
+            left: label.col * (hex ? hexW : cell) + 4,
+            top: label.row * (hex ? cell * 0.75 : cell) + 4,
           }}
         >
           {label.text}
