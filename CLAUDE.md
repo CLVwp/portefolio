@@ -17,7 +17,7 @@
 - All UI strings are FR + EN pairs in `src/lib/i18n.ts`; never hardcode user-visible text.
 - Descriptions (`src/lib/experiences.ts`, `/about` timeline) render with `whitespace-pre-line`: `\n` = line break, `\n\n` = paragraph break; each string (`fr`/`en`) carries its own breaks.
 - Blog posts: one file per post in `src/lib/posts/` implementing the `Post` type (`types.ts`); register it in `posts/index.ts`. Post content is markdown rendered by `blog-post.tsx`.
-- Projects: all data in `PROJECTS` (`src/lib/projects.ts`, same-file `Project` type); the `/projects` page renders the cards. A project has no detail page: it links out via optional `links.post` (slug of a blog post = the project's write-up), `links.demo` and `links.source` (external URLs). All three optional; `stack` optional too.
+- Projects: one file per project in `src/lib/projects/` implementing the `Project` type (`types.ts`); register it in `projects/index.ts`. The `/projects` page renders the cards. A project has no detail page: it links out via optional `links.post` (slug of a blog post = the project's write-up), `links.demo` and `links.source` (external URLs). All three optional; `stack` optional too.
 
 ## Environment
 - A dev server is usually already running on :3000 (user's). Check it before starting `bun dev` (fails with "Another next dev server is already running"). Kill via `taskkill /PID <pid> /F` if a restart is needed.
