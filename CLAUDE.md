@@ -16,7 +16,8 @@
 ## Content
 - All UI strings are FR + EN pairs in `src/lib/i18n.ts`; never hardcode user-visible text.
 - Descriptions (`src/lib/experiences.ts`, `/about` timeline) render with `whitespace-pre-line`: `\n` = line break, `\n\n` = paragraph break; each string (`fr`/`en`) carries its own breaks.
+- Blog posts: one file per post in `src/lib/posts/` implementing the `Post` type (`types.ts`); register it in `posts/index.ts`. Post content is markdown rendered by `blog-post.tsx`.
 
 ## Environment
 - A dev server is usually already running on :3000 (user's). Check it before starting `bun dev` (fails with "Another next dev server is already running"). Kill via `taskkill /PID <pid> /F` if a restart is needed.
-- Visual checks: Playwright MCP tools work well: `browser_take_screenshot` + `browser_evaluate` (getBoundingClientRect) to verify layout/alignment numerically instead of guessing. Text inside collapsed zones (`grid-rows-[0fr]`) is invisible to `browser_find`: query it via `browser_evaluate`. Fresh browser defaults to EN.
+- Visual checks: for simple fixes, make the change and ask the user to eyeball it on :3000. Use Playwright MCP only for numeric invariants (e.g. the delta = 0px axis check) via `browser_evaluate` (getBoundingClientRect). Text inside collapsed zones (`grid-rows-[0fr]`) is invisible to `browser_find`: query it via `browser_evaluate`. Fresh browser defaults to EN.
