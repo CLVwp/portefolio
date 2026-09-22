@@ -187,20 +187,7 @@
   }
 }
 
-/* ─── Mistral-style pixel mosaic ─── */
-@keyframes mosaic-pulse {
-  0%,
-  100% {
-    opacity: 0.15;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-.mosaic-cell {
-  animation-name: mosaic-pulse;
-  anim/* ─── Theme tokens (dark default, .light override) ─── */
+/* ─── Theme tokens (dark default, .light override) ─── */
 :root {
   --bg: #000;
   --fg: #fff;

@@ -28,10 +28,9 @@ export function CompanyLogo({ company, className }: CompanyLogoProps) {
   return (
     <Image
       alt={logo.alt}
-      className={className ?? "h-auto w-auto object-contain"}
+      className={className ?? "w-auto object-contain"}
       height={displayHeight}
       src={logo.src}
-      style={{ height: displayHeight, width: "auto" }}
       width={displayHeight * 4}
     />
   );
