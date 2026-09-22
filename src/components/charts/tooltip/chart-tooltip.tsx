@@ -4,17 +4,17 @@ import { motion, useSpring } from "motion/react";
 import { memo, useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import {
-  resolveTooltipBoxMotion,
-  type SpringConfig,
-  useChartConfig,
-} from "../chart-config-context";
-import {
   chartCssVars,
   type LineConfig,
   useChart,
   useChartStable,
 } from "../chart-context";
 import { weekdayDateFmt } from "../chart-formatters";
+import {
+  DEFAULT_CHART_CONFIG,
+  resolveTooltipBoxMotion,
+  type SpringConfig,
+} from "../chart-springs";
 import type { IndicatorFadeEdges } from "../indicator-fade";
 import { DateTicker } from "./date-ticker";
 import { TooltipBox } from "./tooltip-box";
@@ -137,7 +137,7 @@ const ChartTooltipInner = memo(function ChartTooltipInner({
     bandWidth,
     squareSnap,
   } = useChart();
-  const { tooltipSpring } = useChartConfig();
+  const { tooltipSpring } = DEFAULT_CHART_CONFIG;
 
   const isHorizontal = orientation === "horizontal";
   const discreteInteraction = dateLabels.length > 60;
@@ -178,7 +178,6 @@ const ChartTooltipInner = memo(function ChartTooltipInner({
     discreteInteraction,
     matchCrosshair,
     springConfig,
-    tooltipSpring,
   ]);
 
   const visible = tooltipData !== null;
@@ -402,7 +401,7 @@ function DatePillTrackerInner({
   springConfig,
   visible,
 }: DatePillTrackerProps) {
-  const { tooltipSpring } = useChartConfig();
+  const { tooltipSpring } = DEFAULT_CHART_CONFIG;
   const effectiveSpring = springConfig ?? tooltipSpring;
   const animatedX = useSpring(xWithMargin, effectiveSpring);
 

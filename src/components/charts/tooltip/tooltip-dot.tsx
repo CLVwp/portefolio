@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useSpring, useTransform } from "motion/react";
-import { type SpringConfig, useChartConfig } from "../chart-config-context";
 import { chartCssVars } from "../chart-context";
+import { DEFAULT_CHART_CONFIG, type SpringConfig } from "../chart-springs";
 
 export interface TooltipDotProps {
   x: number;
@@ -20,7 +20,7 @@ export interface TooltipDotProps {
    * Same semantics as bar square radius.
    */
   cornerRadiusFraction?: number;
-  /** Per-chart override; falls back to `ChartConfigProvider.tooltipSpring`. */
+  /** Per-chart override; falls back to `DEFAULT_CHART_CONFIG.tooltipSpring`. */
   springConfig?: SpringConfig;
   /** Animate position with a spring. Default: true */
   animate?: boolean;
@@ -53,7 +53,7 @@ function AnimatedRingDot({
   strokeWidth: number;
   springConfig?: SpringConfig;
 }) {
-  const { tooltipSpring } = useChartConfig();
+  const { tooltipSpring } = DEFAULT_CHART_CONFIG;
   const effectiveSpring = springConfig ?? tooltipSpring;
   const animatedX = useSpring(x, effectiveSpring);
   const animatedY = useSpring(y, effectiveSpring);
@@ -93,7 +93,7 @@ export function TooltipDot({
   springConfig,
   animate = true,
 }: TooltipDotProps) {
-  const { tooltipSpring } = useChartConfig();
+  const { tooltipSpring } = DEFAULT_CHART_CONFIG;
   const effectiveSpring = springConfig ?? tooltipSpring;
   const animatedX = useSpring(x, effectiveSpring);
   const animatedY = useSpring(y, effectiveSpring);

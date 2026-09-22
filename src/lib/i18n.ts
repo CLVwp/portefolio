@@ -129,57 +129,8 @@ export const dict = {
   },
 } as const;
 
-export type Dict = {
-  nav: {
-    home: string;
-    about: string;
-    blog: string;
-    contact: string;
-    menu: string;
-    close: string;
-    footer: string;
-  };
-  home: {
-    eyebrow: string;
-    title1: string;
-    title2: string;
-    subtitle: string;
-    cta: string;
-    workEyebrow: string;
-    workTitle: string;
-    projectsEyebrow: string;
-    projectsTitle: string;
-    contactEyebrow: string;
-    contactTitle: string;
-    statsEyebrow: string;
-    visitsLabel: string;
-    skillsLabel: string;
-    footer: string;
-  };
-  about: {
-    eyebrow: string;
-    title1: string;
-    title2: string;
-    subtitle: string;
-    timelineEyebrow: string;
-    subjectsEyebrow: string;
-    subjectsLabel: string;
-    skillsLabel: string;
-    projectsEyebrow: string;
-    cvEyebrow: string;
-    cvTitle: string;
-    cvCta: string;
-    linkedin: string;
-  };
-  blog: {
-    eyebrow: string;
-    title1: string;
-    title2: string;
-    subtitle: string;
-    readMore: string;
-    next: string;
-    back: string;
-    readTime: string;
-    tags: Record<string, string>;
-  };
+type DeepString<T> = {
+  [K in keyof T]: T[K] extends string ? string : DeepString<T[K]>;
 };
+
+export type Dict = DeepString<typeof dict.fr>;

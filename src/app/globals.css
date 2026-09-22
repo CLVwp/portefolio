@@ -67,6 +67,12 @@
   --color-chart-foreground-muted: var(----chart-foreground-muted);
   --color-chart-foreground: var(----chart-foreground);
   --color-chart-background: var(----chart-background);
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-faint: var(--fg-faint);
+  --color-hairline: var(--hairline);
+  --color-hover: var(--hover);
 }
 
 :root {
@@ -187,99 +193,19 @@
   }
 }
 
-/* ─── Theme tokens (dark default, .light override) ─── */
+/* ─── Theme tokens (light, off-white) ─── */
 :root {
-  --bg: #000;
-  --fg: #fff;
-  --fg-muted: rgb(255 255 255 / 50%);
-  --fg-faint: rgb(255 255 255 / 30%);
-  --hairline: rgb(255 255 255 / 10%);
-  --hover: rgb(255 255 255 / 5%);
-  --panel: #0a0a0a;
-}
-
-html.light {
-  --bg: #fafafa;
+  --bg: #f5f2ec;
   --fg: #0a0a0a;
   --fg-muted: rgb(0 0 0 / 55%);
   --fg-faint: rgb(0 0 0 / 35%);
   --hairline: rgb(0 0 0 / 12%);
   --hover: rgb(0 0 0 / 4%);
-  --panel: #fff;
 }
 
-html.light body {
+body {
   background: var(--bg);
   color: var(--fg);
-}
-
-/* Utility-class overrides so hardcoded dark classes follow the theme.
-   Kept in sync with the tokens above — light mode inverts them. */
-html.light .bg-black {
-  background-color: var(--bg);
-}
-html.light .text-white {
-  color: var(--fg);
-}
-html.light .text-white\/90 {
-  color: rgb(0 0 0 / 90%);
-}
-html.light .text-white\/80 {
-  color: rgb(0 0 0 / 80%);
-}
-html.light .text-white\/70 {
-  color: rgb(0 0 0 / 70%);
-}
-html.light .text-white\/60 {
-  color: rgb(0 0 0 / 60%);
-}
-html.light .text-white\/50 {
-  color: rgb(0 0 0 / 55%);
-}
-html.light .text-white\/40 {
-  color: rgb(0 0 0 / 40%);
-}
-html.light .text-white\/30 {
-  color: rgb(0 0 0 / 30%);
-}
-html.light .border-white\/10 {
-  border-color: var(--hairline);
-}
-html.light .border-white\/20 {
-  border-color: rgb(0 0 0 / 20%);
-}
-html.light .hover\:bg-white\/5:hover {
-  background-color: var(--hover);
-}
-html.light .hover\:text-white:hover {
-  color: var(--fg);
-}
-html.light .hover\:bg-white:hover {
-  background-color: var(--fg);
-}
-html.light .hover\:text-black:hover {
-  color: var(--bg);
-}
-html.light .bg-white\/10 {
-  background-color: rgb(0 0 0 / 8%);
-}
-html.light .bg-white\/5 {
-  background-color: var(--hover);
-}
-html.light .from-violet-500\/50 {
-  --tw-gradient-from: rgb(124 58 237 / 50%);
-}
-html.light .text-violet-300\/80 {
-  color: rgb(124 58 237 / 90%);
-}
-html.light .text-emerald-300 {
-  color: rgb(16 185 129 / 90%);
-}
-html.light .text-violet-300 {
-  color: rgb(139 92 246 / 90%);
-}
-html.light .text-amber-300 {
-  color: rgb(217 119 6 / 90%);
 }
 
 /* ─── Mistral-style pixel mosaic ─── */

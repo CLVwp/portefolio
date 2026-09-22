@@ -22,13 +22,13 @@ export function ExperienceCard({ exp }: { exp: Experience }) {
   const { lang } = useLang();
 
   return (
-    <div className="group flex h-full flex-col p-6 transition-colors duration-500 hover:bg-white/5 md:p-8">
+    <div className="group flex h-full flex-col p-6 transition-colors duration-500 hover:bg-hover md:p-8">
       <div className="flex items-center justify-between">
         <CompanyLogo
           company={exp.logo}
-          className="h-6 w-auto text-white/80 transition-colors group-hover:text-white"
+          className="h-6 w-auto text-fg/80 transition-colors group-hover:text-fg"
         />
-        <span className="font-mono text-[10px] tracking-[0.2em] text-white/40">
+        <span className="font-mono text-[10px] tracking-[0.2em] text-fg/40">
           {exp.period}
         </span>
       </div>
@@ -36,15 +36,15 @@ export function ExperienceCard({ exp }: { exp: Experience }) {
         <h3 className="text-xl font-medium tracking-tight md:text-2xl">
           {exp.name}
         </h3>
-        <p className="mt-1 font-mono text-xs text-violet-300/80">
+        <p className="mt-1 font-mono text-xs text-violet-600/90">
           {exp.role[lang]}
         </p>
-        <p className="mt-3 text-sm text-white/50">{exp.desc[lang]}</p>
+        <p className="mt-3 text-sm text-fg-muted">{exp.desc[lang]}</p>
       </div>
       {/* Hover-expand zone */}
       <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:grid-rows-[1fr]">
         <div className="overflow-hidden">
-          <p className="mt-4 border-t border-white/10 pt-4 text-sm leading-relaxed text-white/60">
+          <p className="mt-4 border-t border-hairline pt-4 text-sm leading-relaxed text-fg/60">
             {exp.details[lang]}
           </p>
         </div>

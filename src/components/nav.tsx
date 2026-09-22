@@ -11,7 +11,7 @@ const EASE = [0.32, 0.72, 0, 1] as const;
 export function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const { lang, t, toggle, theme, toggleTheme } = useLang();
+  const { lang, t, toggle } = useLang();
 
   const links = [
     { label: t.nav.home, href: "/" },
@@ -24,51 +24,60 @@ export function Nav() {
     <>
       <motion.header
         animate={{ y: open ? -80 : 0, opacity: open ? 0 : 1 }}
-        className="sticky top-0 z-40 border-b border-white/10 bg-black"
+        className="sticky top-0 z-40 border-b border-hairline bg-bg"
         transition={{ duration: 0.5, ease: EASE }}
       >
-        <div className="mx-auto flex max-w-6xl items-stretch justify-between">
+        <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-stretch">
           <Link
-            className="flex items-center border-r border-white/10 px-6 py-4 font-mono text-sm tracking-[0.2em] text-white transition-colors hover:bg-white/5"
+            className="flex items-center border-r border-hairline px-6 py-4 font-mono text-sm tracking-[0.2em] text-fg transition-colors hover:bg-hover"
             href="/"
           >
             CLM
           </Link>
 
-          <nav className="hidden items-stretch md:flex">
-            {links.map((link) => (
-              <Link
-                className={`flex items-center border-r border-white/10 px-6 font-mono text-xs tracking-[0.2em] uppercase transition-colors hover:bg-white/5 ${
-                  pathname === link.href ? "text-white" : "text-white/50"
-                }`}
-                href={link.href}
-                key={link.href}
-              >
-                {link.label}
-              </Link>
-            ))}
+          {/* Two equal halves around the container axis: the middle border
+              continues the pages' central hairline (50% of max-w-6xl) exactly. */}
+          <nav className="hidden items-stretch md:grid md:grid-cols-2">
+            <div className="flex items-stretch justify-end border-r border-hairline">
+              {links.slice(0, 2).map((link) => (
+                <Link
+                  className={`flex items-center px-6 font-mono text-xs tracking-[0.2em] uppercase transition-colors hover:bg-hover ${
+                    pathname === link.href ? "text-fg" : "text-fg-muted"
+                  }`}
+                  href={link.href}
+                  key={link.href}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+            <div className="flex items-stretch">
+              {links.slice(2).map((link, i) => (
+                <Link
+                  className={`flex items-center px-6 font-mono text-xs tracking-[0.2em] uppercase transition-colors hover:bg-hover ${
+                    i === 0 ? "border-r border-hairline" : ""
+                  } ${pathname === link.href ? "text-fg" : "text-fg-muted"}`}
+                  href={link.href}
+                  key={link.href}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </nav>
 
-          <div className="flex items-stretch">
+          <div className="flex items-stretch justify-end">
             <button
               aria-label="Toggle language"
-              className="flex items-center border-l border-white/10 px-4 font-mono text-xs tracking-[0.2em] text-white/70 uppercase transition-colors hover:bg-white/5 hover:text-white"
+              className="flex items-center border-l border-hairline px-4 font-mono text-xs tracking-[0.2em] text-fg/70 uppercase transition-colors hover:bg-hover hover:text-fg"
               onClick={toggle}
               type="button"
             >
               {lang === "fr" ? "FR" : "EN"}
             </button>
             <button
-              aria-label="Toggle theme"
-              className="flex items-center border-l border-white/10 px-4 font-mono text-xs tracking-[0.2em] text-white/70 uppercase transition-colors hover:bg-white/5 hover:text-white"
-              onClick={toggleTheme}
-              type="button"
-            >
-              {theme === "dark" ? "☾" : "☀"}
-            </button>
-            <button
               aria-label={t.nav.menu}
-              className="group flex w-14 items-center justify-center border-l border-white/10 transition-colors hover:bg-white/5"
+              className="group flex w-14 items-center justify-center border-l border-hairline transition-colors hover:bg-hover"
               onClick={() => setOpen(true)}
               type="button"
             >
@@ -85,15 +94,15 @@ export function Nav() {
         {open && (
           <motion.div
             animate={{ opacity: 1 }}
-            className="fixed inset-0 z-50 flex flex-col bg-black"
+            className="fixed inset-0 z-50 flex flex-col bg-bg"
             exit={{ opacity: 0 }}
             initial={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: EASE }}
           >
-            <div className="flex justify-end border-b border-white/10">
+            <div className="flex justify-end border-b border-hairline">
               <button
                 aria-label={t.nav.close}
-                className="flex h-16 w-16 items-center justify-center border-l border-white/10 transition-colors hover:bg-white/5"
+                className="flex h-16 w-16 items-center justify-center border-l border-hairline transition-colors hover:bg-hover"
                 onClick={() => setOpen(false)}
                 type="button"
               >
@@ -108,7 +117,7 @@ export function Nav() {
               {links.map((link, i) => (
                 <motion.div
                   animate={{ y: 0, opacity: 1 }}
-                  className="w-full border-b border-white/10"
+                  className="w-full border-b border-hairline"
                   initial={{ y: 48, opacity: 0 }}
                   key={link.href}
                   transition={{
@@ -118,8 +127,8 @@ export function Nav() {
                   }}
                 >
                   <Link
-                    className={`block px-8 py-6 text-5xl font-medium tracking-tight transition-colors hover:text-white sm:text-6xl ${
-                      pathname === link.href ? "text-white" : "text-white/50"
+                    className={`block px-8 py-6 text-5xl font-medium tracking-tight transition-colors hover:text-fg sm:text-6xl ${
+                      pathname === link.href ? "text-fg" : "text-fg-muted"
                     }`}
                     href={link.href}
                     onClick={() => setOpen(false)}
@@ -132,7 +141,7 @@ export function Nav() {
 
             <motion.footer
               animate={{ opacity: 1 }}
-              className="px-8 py-10 font-mono text-xs tracking-[0.2em] text-white/40 uppercase"
+              className="px-8 py-10 font-mono text-xs tracking-[0.2em] text-fg/40 uppercase"
               initial={{ opacity: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
             >

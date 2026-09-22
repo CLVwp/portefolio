@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local env/setup scripts
+/claude_code_zai_env.sh
+
+.playwright-mcp/

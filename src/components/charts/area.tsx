@@ -1,7 +1,7 @@
 "use client";
 
-import { curveMonotoneX } from "@visx/curve";
 import { AreaClosed, LinePath } from "@visx/shape";
+import { curveMonotoneX } from "d3-shape";
 
 // CurveFactory type - simplified version compatible with visx
 // biome-ignore lint/suspicious/noExplicitAny: d3 curve factory type

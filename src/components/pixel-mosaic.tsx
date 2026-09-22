@@ -79,7 +79,7 @@ export function PixelMosaic({
       ))}
       {labels.map((label) => (
         <span
-          className="pointer-events-none absolute font-mono text-[10px] tracking-[0.25em] text-white/70 uppercase"
+          className="pointer-events-none absolute font-mono text-[10px] tracking-[0.25em] text-fg/70 uppercase"
           key={label.text}
           style={{
             left: label.col * cell + 4,

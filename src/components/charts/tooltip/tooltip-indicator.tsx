@@ -2,8 +2,8 @@
 
 import { motion, useSpring } from "motion/react";
 import { useEffect } from "react";
-import { type SpringConfig, useChartConfig } from "../chart-config-context";
 import { chartCssVars } from "../chart-context";
+import { DEFAULT_CHART_CONFIG, type SpringConfig } from "../chart-springs";
 import {
   type IndicatorFadeEdges,
   indicatorFadeGradientStops,
@@ -48,7 +48,7 @@ export interface TooltipIndicatorProps {
   animate?: boolean;
   /** Unique ID for the gradient */
   gradientId?: string;
-  /** Per-chart override; falls back to `ChartConfigProvider.tooltipSpring`. */
+  /** Per-chart override; falls back to `DEFAULT_CHART_CONFIG.tooltipSpring`. */
   springConfig?: SpringConfig;
   /** SVG stroke dash pattern. When set, renders a dashed stroke instead of a solid fill. */
   strokeDasharray?: string;
@@ -97,7 +97,7 @@ function TooltipIndicatorInner({
   springConfig,
   strokeDasharray,
 }: TooltipIndicatorProps) {
-  const { tooltipSpring } = useChartConfig();
+  const { tooltipSpring } = DEFAULT_CHART_CONFIG;
   const effectiveSpring = springConfig ?? tooltipSpring;
 
   const pixelWidth =

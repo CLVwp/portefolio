@@ -5,8 +5,8 @@ import type { RefObject } from "react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
-import { type SpringConfig, useChartConfig } from "../chart-config-context";
 import { chartCssVars } from "../chart-context";
+import { DEFAULT_CHART_CONFIG, type SpringConfig } from "../chart-springs";
 
 export interface TooltipBoxProps {
   /** X position in pixels (relative to container) */
@@ -33,7 +33,7 @@ export interface TooltipBoxProps {
   top?: number | ReturnType<typeof useSpring>;
   /** Force flip direction (for custom positioning) */
   flipped?: boolean;
-  /** Per-chart override; falls back to `ChartConfigProvider.tooltipBoxSpring`. */
+  /** Per-chart override; falls back to `DEFAULT_CHART_CONFIG.tooltipBoxSpring`. */
   springConfig?: SpringConfig;
   /** Animate panel position with a spring. Default: true */
   animate?: boolean;
@@ -87,7 +87,7 @@ function TooltipBoxInner({
 }: Omit<TooltipBoxProps, "visible" | "containerRef"> & {
   container: HTMLElement;
 }) {
-  const { tooltipBoxSpring } = useChartConfig();
+  const { tooltipBoxSpring } = DEFAULT_CHART_CONFIG;
   const effectiveSpring = springConfig ?? tooltipBoxSpring;
 
   const tooltipRef = useRef<HTMLDivElement>(null);

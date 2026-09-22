@@ -60,7 +60,6 @@ import {
   computeSeriesBarRevealClipPadding,
   computeSeriesBarWidth,
 } from "./series-bar-layout";
-import { useStaticChartPreview } from "./static-chart-preview-context";
 import { useAnimatedYDomains } from "./use-animated-y-domains";
 import { useChartInteraction } from "./use-chart-interaction";
 import { useChartPhaseOrchestrator } from "./use-chart-phase-orchestrator";
@@ -213,7 +212,6 @@ const TimeSeriesChartCore = memo(function TimeSeriesChartCore({
 }: TimeSeriesChartInnerProps) {
   // Unique per instance — shared clipPath ids crop later charts (#226).
   const uniqueClipPathId = `${clipPathId}-${useId().replace(/:/g, "")}`;
-  const staticPreview = useStaticChartPreview();
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
@@ -253,7 +251,6 @@ const TimeSeriesChartCore = memo(function TimeSeriesChartCore({
     chartStatus,
     revealSignature,
     skeletonData,
-    skipEnterReveal: staticPreview,
     targetData: data,
     yDomainTweenDuration,
   });
@@ -602,10 +599,7 @@ const TimeSeriesChartCore = memo(function TimeSeriesChartCore({
   );
 
   const useClipReveal =
-    !staticPreview &&
-    renderData.length > 1 &&
-    innerWidth > 0 &&
-    animationDuration > 0;
+    renderData.length > 1 && innerWidth > 0 && animationDuration > 0;
   const isRevealAnimating = chartPhase === "revealing";
   const isRevealConcealing =
     chartPhase === "exitingReady" && animationDuration > 0;

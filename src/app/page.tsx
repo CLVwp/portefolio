@@ -50,7 +50,7 @@ const SKILLS = [
 
 function Eyebrow({ children }: { children: string }) {
   return (
-    <span className="font-mono text-[10px] tracking-[0.25em] text-white/50 uppercase">
+    <span className="font-mono text-[10px] tracking-[0.25em] text-fg-muted uppercase">
       {children}
     </span>
   );
@@ -59,7 +59,7 @@ function Eyebrow({ children }: { children: string }) {
 function Cta({ label, href }: { label: string; href: string }) {
   return (
     <a
-      className="group inline-flex items-center gap-3 border border-white/20 px-6 py-3 text-sm font-medium text-white transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-white hover:text-black"
+      className="group inline-flex items-center gap-3 border border-fg/20 px-6 py-3 text-sm font-medium text-fg transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-fg hover:text-bg"
       href={href}
     >
       {label}
@@ -74,14 +74,14 @@ export default function Home() {
   const { t } = useLang();
 
   return (
-    <div className="relative min-h-[100dvh] overflow-x-clip bg-black text-white">
+    <div className="relative min-h-[100dvh] overflow-x-clip bg-bg text-fg">
       <Nav />
 
       <main>
         {/* ─── Hero ─── */}
-        <section className="border-b border-white/10">
+        <section className="border-b border-hairline">
           <div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2">
-            <div className="flex flex-col justify-center border-r border-white/10 p-8 md:p-16">
+            <div className="flex flex-col justify-center border-r border-hairline p-8 md:p-16">
               <motion.div
                 animate={{ y: 0, opacity: 1 }}
                 initial={{ y: 24, opacity: 0 }}
@@ -97,11 +97,11 @@ export default function Home() {
               >
                 {t.home.title1}
                 <br />
-                <span className="text-white/40">{t.home.title2}</span>
+                <span className="text-fg/40">{t.home.title2}</span>
               </motion.h1>
               <motion.p
                 animate={{ y: 0, opacity: 1 }}
-                className="mt-8 max-w-md leading-relaxed text-white/50"
+                className="mt-8 max-w-md leading-relaxed text-fg-muted"
                 initial={{ y: 24, opacity: 0 }}
                 transition={{ delay: 0.25, duration: 0.8, ease: EASE }}
               >
@@ -131,7 +131,7 @@ export default function Home() {
         </section>
 
         {/* ─── Expériences — grille partagée avec /about ─── */}
-        <section className="border-b border-white/10">
+        <section className="border-b border-hairline">
           <div className="mx-auto max-w-6xl p-8 md:p-16">
             <Reveal>
               <Eyebrow>{t.home.workEyebrow}</Eyebrow>
@@ -139,10 +139,10 @@ export default function Home() {
                 {t.home.workTitle}
               </h2>
             </Reveal>
-            <div className="mt-12 grid grid-cols-1 border-t border-l border-white/10 md:grid-cols-12">
+            <div className="mt-12 grid grid-cols-1 border-t border-l border-hairline md:grid-cols-12">
               {EXPERIENCES.map((exp, i) => (
                 <Reveal
-                  className={`border-r border-b border-white/10 ${exp.span}`}
+                  className={`border-r border-b border-hairline ${exp.span}`}
                   delay={i * 0.06}
                   key={exp.name}
                 >
@@ -154,15 +154,15 @@ export default function Home() {
         </section>
 
         {/* ─── Stats — charts ─── */}
-        <section className="border-b border-white/10">
+        <section className="border-b border-hairline">
           <div className="mx-auto max-w-6xl p-8 md:p-16">
             <Reveal>
               <Eyebrow>{t.home.statsEyebrow}</Eyebrow>
             </Reveal>
-            <div className="mt-12 grid grid-cols-1 border-t border-l border-white/10 md:grid-cols-12">
-              <Reveal className="border-r border-b border-white/10 md:col-span-8">
+            <div className="mt-12 grid grid-cols-1 border-t border-l border-hairline md:grid-cols-12">
+              <Reveal className="border-r border-b border-hairline md:col-span-8">
                 <div className="p-6 md:p-8">
-                  <p className="font-mono text-[10px] tracking-[0.2em] text-white/50 uppercase">
+                  <p className="font-mono text-[10px] tracking-[0.2em] text-fg-muted uppercase">
                     {t.home.visitsLabel}
                   </p>
                   <p className="mt-2 text-3xl font-semibold tracking-tight">
@@ -191,7 +191,7 @@ export default function Home() {
                 </div>
               </Reveal>
               <Reveal
-                className="border-r border-b border-white/10 md:col-span-4"
+                className="border-r border-b border-hairline md:col-span-4"
                 delay={0.1}
               >
                 <div className="flex h-full flex-col items-center justify-center p-6 md:p-8">
@@ -212,9 +212,9 @@ export default function Home() {
         </section>
 
         {/* ─── Contact ─── */}
-        <section className="border-b border-white/10" id="contact">
+        <section className="border-b border-hairline" id="contact">
           <div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2">
-            <div className="flex flex-col items-start justify-center border-r border-white/10 p-8 md:p-16">
+            <div className="flex flex-col items-start justify-center border-r border-hairline p-8 md:p-16">
               <Reveal>
                 <Eyebrow>{t.home.contactEyebrow}</Eyebrow>
                 <h2 className="mt-4 max-w-md text-4xl leading-tight font-medium tracking-tight sm:text-5xl">
@@ -226,7 +226,7 @@ export default function Home() {
                     label="viellardclement@gmail.com"
                   />
                   <a
-                    className="group inline-flex items-center gap-3 border border-white/20 px-6 py-3 text-sm font-medium text-white transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-white hover:text-black"
+                    className="group inline-flex items-center gap-3 border border-fg/20 px-6 py-3 text-sm font-medium text-fg transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-fg hover:text-bg"
                     href="https://www.linkedin.com/in/clement-viellard/"
                     rel="noopener noreferrer"
                     target="_blank"
@@ -261,7 +261,7 @@ export default function Home() {
             labels={[{ text: "CLM — 2026", col: 1, row: 3 }]}
             rows={6}
           />
-          <p className="mt-8 font-mono text-xs tracking-[0.2em] text-white/30 uppercase">
+          <p className="mt-8 font-mono text-xs tracking-[0.2em] text-fg/30 uppercase">
             {t.home.footer}
           </p>
         </div>
