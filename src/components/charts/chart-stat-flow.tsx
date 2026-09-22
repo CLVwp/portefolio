@@ -38,11 +38,9 @@ function formatStatValue(
 }
 
 function useNumberFlowElementReady(): boolean {
-  const [ready, setReady] = useState(
-    () =>
-      typeof customElements !== "undefined" &&
-      Boolean(customElements.get("number-flow-react")),
-  );
+  // Always start false so SSR and client first render match; the effect
+  // flips it post-hydration once the custom element is defined.
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     if (ready) {

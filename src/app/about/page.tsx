@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { Ring, RingCenter, RingChart } from "@/components/charts";
+import { CompanyLogo } from "@/components/company-logo";
 import { ExperienceCard } from "@/components/experience-card";
 import { useLang } from "@/components/lang-provider";
 import { Nav } from "@/components/nav";
@@ -11,14 +12,22 @@ import { EXPERIENCES } from "@/lib/experiences";
 
 const EASE = [0.32, 0.72, 0, 1] as const;
 
-const TIMELINE = [
+const TIMELINE: {
+  period: string;
+  title: { fr: string; en: string };
+  school: string;
+  desc: { fr: string; en: string };
+  tags: string[];
+  logo?: "ece" | "ruse";
+}[] = [
   {
-    period: "2022 — 2027",
+    period: "2022–2027",
+    logo: "ece",
     title: {
-      fr: "Diplôme d'ingénieur — Systèmes Embarqués",
-      en: "Engineering Degree — Embedded Systems",
+      fr: "Diplôme d'ingénieur · Systèmes Embarqués",
+      en: "Engineering Degree · Embedded Systems",
     },
-    school: "ECE Paris — Graduate School of Engineering",
+    school: "ECE Paris · Graduate School of Engineering",
     desc: {
       fr: "Spécialisation Systèmes Embarqués (Aéronautique & Espace), filière internationale. Cours : systèmes embarqués, microprocesseurs, temps réel, machine learning, génie logiciel, gestion de projet.",
       en: "Embedded Systems specialization (Aeronautics & Space), international track. Coursework: embedded systems, microprocessors, real-time, machine learning, software engineering, project management.",
@@ -26,10 +35,11 @@ const TIMELINE = [
     tags: ["EMBEDDED", "MICROPROCESSORS", "REAL-TIME", "ML"],
   },
   {
-    period: "2024 — 2025",
+    period: "2024–2025",
+    logo: "ruse",
     title: {
-      fr: "Erasmus — Engineering University",
-      en: "Erasmus — Engineering University",
+      fr: "Erasmus · Engineering University",
+      en: "Erasmus · Engineering University",
     },
     school: "University of Ruse, Bulgaria",
     desc: {
@@ -39,10 +49,10 @@ const TIMELINE = [
     tags: ["MICROPROCESSORS", "ML", "MANAGEMENT"],
   },
   {
-    period: "2019 — 2022",
+    period: "2019–2022",
     title: {
-      fr: "Bac Général — Maths / Physique-Chimie / SVT",
-      en: "French Baccalauréat — Maths / Physics-Chemistry / Earth & Life Sciences",
+      fr: "Bac Général · Maths / Physique-Chimie / SVT",
+      en: "French Baccalauréat · Maths / Physics-Chemistry / Earth & Life Sciences",
     },
     school: "Lycée",
     desc: {
@@ -136,7 +146,7 @@ export default function AboutPage() {
                 cols={12}
                 labels={[
                   { text: "ECE PARIS", col: 1, row: 2 },
-                  { text: "2022—2027", col: 6, row: 7 },
+                  { text: "2022–2027", col: 6, row: 7 },
                 ]}
                 rows={10}
               />
@@ -159,9 +169,12 @@ export default function AboutPage() {
                 >
                   <div className="flex flex-col gap-6 p-6 transition-colors duration-500 hover:bg-hover md:flex-row md:items-start md:justify-between md:p-8">
                     <div className="max-w-2xl">
-                      <p className="font-mono text-[10px] tracking-[0.2em] text-fg/40">
-                        {item.period}
-                      </p>
+                      <div className="flex items-center gap-3">
+                        {item.logo ? <CompanyLogo company={item.logo} /> : null}
+                        <p className="font-mono text-[10px] tracking-[0.2em] text-fg/40">
+                          {item.period}
+                        </p>
+                      </div>
                       <h3 className="mt-3 text-2xl font-medium tracking-tight">
                         {item.title[lang]}
                       </h3>
@@ -175,7 +188,7 @@ export default function AboutPage() {
                     <div className="flex flex-wrap gap-2 md:justify-end">
                       {item.tags.map((tag) => (
                         <span
-                          className="border border-hairline px-3 py-1 font-mono text-[10px] tracking-[0.15em] text-fg-muted"
+                          className="border border-violet-500/40 px-3 py-1 font-mono text-[10px] tracking-[0.15em] text-fg-muted"
                           key={tag}
                         >
                           {tag}
@@ -325,7 +338,7 @@ export default function AboutPage() {
             cell={20}
             className="opacity-60"
             cols={24}
-            labels={[{ text: "CLM — 2026", col: 1, row: 3 }]}
+            labels={[{ text: "CLM · 2026", col: 1, row: 3 }]}
             rows={6}
           />
           <p className="mt-8 font-mono text-xs tracking-[0.2em] text-fg/30 uppercase">

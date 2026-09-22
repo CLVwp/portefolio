@@ -132,7 +132,7 @@ export default function BlogPage() {
             cell={20}
             className="opacity-60"
             cols={24}
-            labels={[{ text: "CLM — 2026", col: 1, row: 3 }]}
+            labels={[{ text: "CLM · 2026", col: 1, row: 3 }]}
             rows={6}
           />
           <p className="mt-8 font-mono text-xs tracking-[0.2em] text-fg/30 uppercase">

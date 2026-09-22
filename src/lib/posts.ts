@@ -42,7 +42,7 @@ Le bénéfice est énorme : plus de "qui a la bonne version de cette donnée ?".
 
 ## Le piège des agents autonomes
 
-Un agent LLM avec tool calling, ça part vite en vrille si les outils sont mal bornés. La leçon : chaque outil doit avoir un contrat strict (entrées typées, sorties vérifiables), et l'agent doit être évaluable — sinon impossible de savoir s'il dégrade ou améliore le processus.`,
+Un agent LLM avec tool calling, ça part vite en vrille si les outils sont mal bornés. La leçon : chaque outil doit avoir un contrat strict (entrées typées, sorties vérifiables), et l'agent doit être évaluable, sinon impossible de savoir s'il dégrade ou améliore le processus.`,
       en: `At Accenture, I worked on industrial business-application prototypes. The technical core: an independent data twin based on an UNS (Unified Namespace) architecture, and an AI stack running **locally, in the browser**.
 
 ## Why AI in the browser?
@@ -62,7 +62,7 @@ The benefit is huge: no more "who has the right version of this data?". The data
 
 ## The trap of autonomous agents
 
-An LLM agent with tool calling goes off the rails fast if the tools are poorly bounded. The lesson: every tool needs a strict contract (typed inputs, verifiable outputs), and the agent must be evaluable — otherwise you can't tell whether it degrades or improves the process.`,
+An LLM agent with tool calling goes off the rails fast if the tools are poorly bounded. The lesson: every tool needs a strict contract (typed inputs, verifiable outputs), and the agent must be evaluable, otherwise you can't tell whether it degrades or improves the process.`,
     },
   },
   {
@@ -83,12 +83,12 @@ An LLM agent with tool calling goes off the rails fast if the tools are poorly b
 
 ## La culture du rapport d'incident
 
-Écrire un rapport d'incident, ce n'est pas raconter une histoire : c'est produire un document qui doit permettre à quelqu'un d'autre de comprendre, reproduire et corriger — sans toi, parfois des années plus tard.
+Écrire un rapport d'incident, ce n'est pas raconter une histoire : c'est produire un document qui doit permettre à quelqu'un d'autre de comprendre, reproduire et corriger, sans toi, parfois des années plus tard.
 
 Structure apprise sur place :
-1. **Faits** — horodatés, sourcés, sans interprétation
-2. **Analyse** — hypothèses explicitement marquées comme telles
-3. **Recommandations** — hiérarchisées par criticité, avec coût estimé
+1. **Faits** : horodatés, sourcés, sans interprétation
+2. **Analyse** : hypothèses explicitement marquées comme telles
+3. **Recommandations** : hiérarchisées par criticité, avec coût estimé
 
 ## Pentesting : la partie émergée
 
@@ -101,12 +101,12 @@ Depuis, j'écris chaque système en me demandant : "quel est le mode de défaill
 
 ## The incident report culture
 
-Writing an incident report isn't telling a story: it's producing a document that must let someone else understand, reproduce and fix — without you, sometimes years later.
+Writing an incident report isn't telling a story: it's producing a document that must let someone else understand, reproduce and fix, without you, sometimes years later.
 
 Structure learned on site:
-1. **Facts** — timestamped, sourced, no interpretation
-2. **Analysis** — hypotheses explicitly marked as such
-3. **Recommendations** — ranked by criticality, with estimated cost
+1. **Facts**: timestamped, sourced, no interpretation
+2. **Analysis**: hypotheses explicitly marked as such
+3. **Recommendations**: ranked by criticality, with estimated cost
 
 ## Pentesting: the visible part
 
@@ -124,8 +124,8 @@ Since then, I write every system asking: "what is the failure mode, and who dete
       en: "Erasmus in Ruse: studying engineering in another language (and another rigor)",
     },
     excerpt: {
-      fr: "Un semestre à l'University of Ruse en Bulgarie. Microprocesseurs, ML, économie internationale — et une leçon sur ce que « apprendre » veut dire quand on change de système.",
-      en: "One semester at the University of Ruse in Bulgaria. Microprocessors, ML, international economics — and a lesson on what 'learning' means when the system changes.",
+      fr: "Un semestre à l'University of Ruse en Bulgarie. Microprocesseurs, ML, économie internationale, et une leçon sur ce que « apprendre » veut dire quand on change de système.",
+      en: "One semester at the University of Ruse in Bulgaria. Microprocessors, ML, international economics, and a lesson on what 'learning' means when the system changes.",
     },
     date: "2026-07-20",
     readTime: "5 min",
@@ -135,7 +135,7 @@ Since then, I write every system asking: "what is the failure mode, and who dete
 
 ## Le microprocesseur, autrement
 
-Le cours de microprocesseurs à Ruse était plus pratique que ce que j'avais connu : on manipulait le hardware tôt, avec des TP sur cartes réelles dès les premières semaines. En France, on avait d'abord construit la théorie. Les deux approches se complètent — mais la manipulation directe ancre les concepts bien plus vite.
+Le cours de microprocesseurs à Ruse était plus pratique que ce que j'avais connu : on manipulait le hardware tôt, avec des TP sur cartes réelles dès les premières semaines. En France, on avait d'abord construit la théorie. Les deux approches se complètent, mais la manipulation directe ancre les concepts bien plus vite.
 
 ## Le ML sans la magie
 
@@ -150,7 +150,7 @@ Le cours de machine learning allait droit au but : descente de gradient à la ma
 
 ## The microprocessor, differently
 
-The microprocessors course at Ruse was more hands-on than what I had known: we manipulated hardware early, with labs on real boards from the first weeks. In France, we had built the theory first. Both approaches complement each other — but direct manipulation anchors concepts much faster.
+The microprocessors course at Ruse was more hands-on than what I had known: we manipulated hardware early, with labs on real boards from the first weeks. In France, we had built the theory first. Both approaches complement each other, but direct manipulation anchors concepts much faster.
 
 ## ML without the magic
 
@@ -193,7 +193,7 @@ La tentation d'une petite équipe : tout faire soi-même. L'erreur. Ce qui a fon
 
 ## Agile à échelle humaine
 
-Kanban sur un tableau simple, Scrum allégé sans les cérémonies qui n'apportent rien à 3 personnes. La méthodologie doit servir l'équipe, pas l'inverse — leçon valable pour n'importe quelle taille d'équipe.`,
+Kanban sur un tableau simple, Scrum allégé sans les cérémonies qui n'apportent rien à 3 personnes. La méthodologie doit servir l'équipe, pas l'inverse : leçon valable pour n'importe quelle taille d'équipe.`,
       en: `One year as Head of Information Systems & DPO at JEECE, ECE Paris' junior enterprise. A team of 3, internal projects, digital service offerings for real clients, and GDPR compliance.
 
 ## GDPR, concretely
@@ -210,7 +210,7 @@ The temptation of a small team: do everything yourself. The mistake. What worked
 
 ## Agile at human scale
 
-Kanban on a simple board, lightweight Scrum without the ceremonies that add nothing to 3 people. Methodology must serve the team, not the other way around — a lesson valid at any team size.`,
+Kanban on a simple board, lightweight Scrum without the ceremonies that add nothing to 3 people. Methodology must serve the team, not the other way around: a lesson valid at any team size.`,
     },
   },
 ];

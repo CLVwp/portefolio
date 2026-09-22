@@ -10,15 +10,15 @@ export const dict = {
       contact: "Contact",
       menu: "Menu",
       close: "Fermer",
-      footer: "Disponible pour un stage — 2027",
+      footer: "Disponible pour un stage · 2027",
     },
     // Home
     home: {
-      eyebrow: "Ingénieur embarqué & IA — Paris",
+      eyebrow: "Ingénieur embarqué & IA · Paris",
       title1: "Clément Viellard.",
       title2: "Du silicium au produit.",
       subtitle:
-        "Étudiant ingénieur à ECE Paris — systèmes embarqués & IA. À la recherche d'un stage de 6 mois à partir de janvier 2027.",
+        "Étudiant ingénieur à ECE Paris, systèmes embarqués & IA. À la recherche d'un stage de 6 mois à partir de janvier 2027.",
       cta: "Voir le parcours",
       workEyebrow: "Expériences",
       workTitle: "Là où j'ai construit.",
@@ -26,10 +26,7 @@ export const dict = {
       projectsTitle: "Ce que j'ai livré.",
       contactEyebrow: "Contact",
       contactTitle: "Un projet à construire ?",
-      statsEyebrow: "En chiffres",
-      visitsLabel: "Visites du site — 90 derniers jours",
-      skillsLabel: "Stack technique",
-      footer: "© 2026 — Construit avec Next.js, Motion & Bklit",
+      footer: "© 2026 · Construit avec Next.js, Motion & Bklit",
     },
     // About
     about: {
@@ -37,7 +34,7 @@ export const dict = {
       title1: "Ingénieur par formation,",
       title2: "curieux par obsession.",
       subtitle:
-        "Je m'appelle Clément Viellard. Étudiant ingénieur à ECE Paris, spécialisé en systèmes embarqués (aéronautique & espace). Ce qui me motive : comprendre comment les systèmes tiennent debout — du microprocesseur au produit — puis les rendre agréables à utiliser.",
+        "Je m'appelle Clément Viellard. Étudiant ingénieur à ECE Paris, spécialisé en systèmes embarqués (aéronautique & espace). Ce qui me motive : comprendre comment les systèmes tiennent debout, du microprocesseur au produit, puis les rendre agréables à utiliser.",
       timelineEyebrow: "Parcours académique",
       subjectsEyebrow: "Matières & compétences",
       subjectsLabel: "Matières fortes",
@@ -74,14 +71,14 @@ export const dict = {
       contact: "Contact",
       menu: "Menu",
       close: "Close",
-      footer: "Available for an internship — 2027",
+      footer: "Available for an internship · 2027",
     },
     home: {
-      eyebrow: "Embedded & AI Engineer — Paris",
+      eyebrow: "Embedded & AI Engineer · Paris",
       title1: "Clément Viellard.",
       title2: "From silicon to product.",
       subtitle:
-        "Engineering student at ECE Paris — embedded systems & AI. Looking for a 6-month internship starting January 2027.",
+        "Engineering student at ECE Paris, embedded systems & AI. Looking for a 6-month internship starting January 2027.",
       cta: "See the journey",
       workEyebrow: "Experience",
       workTitle: "Where I've built.",
@@ -89,17 +86,14 @@ export const dict = {
       projectsTitle: "What I've shipped.",
       contactEyebrow: "Contact",
       contactTitle: "Something worth building?",
-      statsEyebrow: "In numbers",
-      visitsLabel: "Site visits — last 90 days",
-      skillsLabel: "Technical stack",
-      footer: "© 2026 — Built with Next.js, Motion & Bklit",
+      footer: "© 2026 · Built with Next.js, Motion & Bklit",
     },
     about: {
       eyebrow: "About",
       title1: "Engineer by training,",
       title2: "curious by obsession.",
       subtitle:
-        "I'm Clément Viellard. Engineering student at ECE Paris, specialized in embedded systems (aeronautics & space). What drives me: understanding how systems hold together — from the microprocessor to the product — then making them pleasant to use.",
+        "I'm Clément Viellard. Engineering student at ECE Paris, specialized in embedded systems (aeronautics & space). What drives me: understanding how systems hold together, from the microprocessor to the product, then making them pleasant to use.",
       timelineEyebrow: "Academic journey",
       subjectsEyebrow: "Subjects & skills",
       subjectsLabel: "Strong subjects",

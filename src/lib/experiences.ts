@@ -12,24 +12,25 @@ export const EXPERIENCES: Experience[] = [
       en: "Firmware Embedded Engineer Associate / AI Engineer",
     },
     period: "2026",
+    duration: { fr: "6 mois", en: "6 months" },
     desc: {
       fr: "Développement de 3 prototypes d'applications métier industrielles.",
       en: "Development of 3 industrial business-application prototypes.",
     },
     details: {
-      fr: "Conception d'outils d'analyse de processus basés sur un jumeau de données indépendant (architecture UNS) et une stack IA locale navigateur (Silero VAD, STT en WebAssembly/ONNX). Le système intègre des LLM fine-tunés (RAG, tool calling, harness) et s'étend à l'ingestion multimodale complète (audio, vidéo via VLM, flux capteurs) pour exécuter des agents IA autonomes dédiés à des tâches métier spécifiques.",
-      en: "Design of process-analysis tools based on an independent data digital twin (UNS architecture) and a local, in-browser AI stack (Silero VAD, STT via WebAssembly/ONNX). The system integrates fine-tuned LLMs (RAG, tool calling, harness) and extends to full multimodal ingestion (audio, video via VLM, sensor streams) to run autonomous AI agents dedicated to specific business tasks.",
+      fr: "Conception d'outils d'analyse de processus basés sur un jumeau de données indépendant (architecture UNS) et une stack IA locale navigateur (Silero VAD, STT en WebAssembly/ONNX).\n\nLe système intègre des LLM fine-tunés (RAG, tool calling, harness) et s'étend à l'ingestion multimodale complète (audio, vidéo via VLM, flux capteurs) pour exécuter des agents IA autonomes dédiés à des tâches métier spécifiques.",
+      en: "Design of process-analysis tools based on an independent data digital twin (UNS architecture) and a local, in-browser AI stack (Silero VAD, STT via WebAssembly/ONNX).\n\nThe system integrates fine-tuned LLMs (RAG, tool calling, harness) and extends to full multimodal ingestion (audio, video via VLM, sensor streams) to run autonomous AI agents dedicated to specific business tasks.",
     },
     logo: "accenture",
     span: "md:col-span-7",
   },
   {
-    name: "JEECE — Head of IS & DPO",
+    name: "JEECE · Head of IS & DPO",
     role: {
       fr: "Head of Information Systems & Data Protection Officer",
       en: "Head of Information Systems & Data Protection Officer",
     },
-    period: "2025 — 2026",
+    period: "2025–2026",
     desc: {
       fr: "Direction du SI de la junior-entreprise d'ECE Paris.",
       en: "Led the IS of ECE Paris' junior enterprise.",
@@ -42,12 +43,13 @@ export const EXPERIENCES: Experience[] = [
     span: "md:col-span-5",
   },
   {
-    name: "Immersion cybersécurité — CEA",
+    name: "Immersion cybersécurité · CEA",
     role: {
-      fr: "Stage — Direction de la sûreté nucléaire",
-      en: "Internship — Nuclear Security and Safety Directorate",
+      fr: "Stage, Direction de la sûreté nucléaire",
+      en: "Internship, Nuclear Security and Safety Directorate",
     },
     period: "2024",
+    duration: { fr: "2 mois", en: "2 months" },
     desc: {
       fr: "Immersion d'un mois au sein de la direction de la sûreté nucléaire.",
       en: "One-month immersion within the nuclear security and safety directorate.",
@@ -60,12 +62,13 @@ export const EXPERIENCES: Experience[] = [
     span: "md:col-span-5",
   },
   {
-    name: "Discovery Program — Microsoft",
+    name: "Discovery Program · Microsoft",
     role: {
-      fr: "Stage — Programme découverte (Commercial Executive)",
-      en: "Internship — Discovery Program (Commercial Executive)",
+      fr: "Stage, Programme découverte (Commercial Executive)",
+      en: "Internship, Discovery Program (Commercial Executive)",
     },
     period: "2019",
+    duration: { fr: "2 mois", en: "2 months" },
     desc: {
       fr: "Contribution à un projet de groupe concevant et pitchant un concept produit tech.",
       en: "Contributed to a group project designing and pitching a tech product concept.",

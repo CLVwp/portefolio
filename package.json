@@ -10,7 +10,7 @@
     "lint:fix": "biome check --write",
     "format": "biome format --write",
     "typecheck": "tsc --noEmit",
-    "validate": "biome check && tsc --noEmit"
+    "validate": "biome check && tsc --noEmit && bun scripts/check-chars.ts"
   },
   "dependencies": {
     "@number-flow/react": "^0.6.2",

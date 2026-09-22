@@ -7,6 +7,7 @@ export interface Experience {
   name: string;
   role: { fr: string; en: string };
   period: string;
+  duration?: { fr: string; en: string };
   desc: { fr: string; en: string };
   details: { fr: string; en: string };
   logo: "accenture" | "cea" | "microsoft" | "jeece" | "ece";
@@ -26,10 +27,11 @@ export function ExperienceCard({ exp }: { exp: Experience }) {
       <div className="flex items-center justify-between">
         <CompanyLogo
           company={exp.logo}
-          className="h-6 w-auto text-fg/80 transition-colors group-hover:text-fg"
+          className="text-fg/80 transition-colors group-hover:text-fg"
         />
         <span className="font-mono text-[10px] tracking-[0.2em] text-fg/40">
           {exp.period}
+          {exp.duration ? ` · ${exp.duration[lang]}` : ""}
         </span>
       </div>
       <div className="mt-6">
@@ -44,7 +46,7 @@ export function ExperienceCard({ exp }: { exp: Experience }) {
       {/* Hover-expand zone */}
       <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:grid-rows-[1fr]">
         <div className="overflow-hidden">
-          <p className="mt-4 border-t border-hairline pt-4 text-sm leading-relaxed text-fg/60">
+          <p className="mt-4 whitespace-pre-line border-t border-hairline pt-4 text-sm leading-relaxed text-fg/60">
             {exp.details[lang]}
           </p>
         </div>

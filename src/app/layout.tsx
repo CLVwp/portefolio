@@ -14,9 +14,9 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Clément Viellard — Embedded & AI Engineer",
+  title: "Clément Viellard · Embedded & AI Engineer",
   description:
-    "Portfolio de Clément Viellard — étudiant ingénieur ECE Paris, systèmes embarqués & IA. Stage 6 mois à partir de janvier 2027.",
+    "Portfolio de Clément Viellard, étudiant ingénieur ECE Paris, systèmes embarqués & IA. Stage 6 mois à partir de janvier 2027.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

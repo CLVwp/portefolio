@@ -29,10 +29,14 @@ export function Nav() {
       >
         <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-stretch">
           <Link
-            className="flex items-center border-r border-hairline px-6 py-4 font-mono text-sm tracking-[0.2em] text-fg transition-colors hover:bg-hover"
-            href="/"
+            className="flex items-stretch border-r border-hairline"
+            href="https://cv.clementviellard.com"
+            target="_blank"
+            rel="noreferrer"
           >
-            CLM
+            <span className="flex items-center px-6 py-4 font-mono text-sm tracking-[0.2em] text-fg transition-colors hover:bg-hover">
+              CV
+            </span>
           </Link>
 
           {/* Two equal halves around the container axis: the middle border
@@ -77,13 +81,13 @@ export function Nav() {
             </button>
             <button
               aria-label={t.nav.menu}
-              className="group flex w-14 items-center justify-center border-l border-hairline transition-colors hover:bg-hover"
+              className="group flex w-14 items-center justify-center border-l border-hairline bg-fg/5 transition-colors hover:bg-fg/10"
               onClick={() => setOpen(true)}
               type="button"
             >
               <span className="relative block h-3 w-5">
-                <span className="absolute top-0 left-0 h-px w-full bg-white transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-y-[1px]" />
-                <span className="absolute bottom-0 left-0 h-px w-full bg-white transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:-translate-y-[1px]" />
+                <span className="absolute top-0 left-0 h-px w-full bg-fg transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-y-[1px]" />
+                <span className="absolute bottom-0 left-0 h-px w-full bg-fg transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:-translate-y-[1px]" />
               </span>
             </button>
           </div>
@@ -107,8 +111,8 @@ export function Nav() {
                 type="button"
               >
                 <span className="relative block h-4 w-4">
-                  <span className="absolute top-1/2 left-0 h-px w-full rotate-45 bg-white" />
-                  <span className="absolute top-1/2 left-0 h-px w-full -rotate-45 bg-white" />
+                  <span className="absolute top-1/2 left-0 h-px w-full rotate-45 bg-fg" />
+                  <span className="absolute top-1/2 left-0 h-px w-full -rotate-45 bg-fg" />
                 </span>
               </button>
             </div>

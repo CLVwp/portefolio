@@ -1,16 +1,6 @@
 "use client";
 
 import { motion } from "motion/react";
-import {
-  Area,
-  AreaChart,
-  ChartTooltip,
-  Grid,
-  Ring,
-  RingCenter,
-  RingChart,
-  XAxis,
-} from "@/components/charts";
 import { ExperienceCard } from "@/components/experience-card";
 import { useLang } from "@/components/lang-provider";
 import { Nav } from "@/components/nav";
@@ -19,34 +9,6 @@ import { Reveal } from "@/components/reveal";
 import { EXPERIENCES } from "@/lib/experiences";
 
 const EASE = [0.32, 0.72, 0, 1] as const;
-
-function buildTraffic() {
-  let seed = 7;
-  const rand = () => {
-    seed = (seed * 16807) % 2147483647;
-    return seed / 2147483647;
-  };
-  const days: { date: Date; visits: number }[] = [];
-  let base = 1200;
-  for (let i = 0; i < 90; i++) {
-    base += (rand() - 0.42) * 140;
-    base = Math.max(600, base);
-    days.push({
-      date: new Date(2026, 5, 22 + i),
-      visits: Math.round(base + Math.sin(i / 5) * 180),
-    });
-  }
-  return days;
-}
-
-const TRAFFIC = buildTraffic();
-
-const SKILLS = [
-  { label: "C / C++", value: 92, maxValue: 100 },
-  { label: "Python", value: 84, maxValue: 100 },
-  { label: "TypeScript", value: 80, maxValue: 100 },
-  { label: "VHDL / ASM", value: 72, maxValue: 100 },
-];
 
 function Eyebrow({ children }: { children: string }) {
   return (
@@ -130,7 +92,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ─── Expériences — grille partagée avec /about ─── */}
+        {/* ─── Expériences - grille partagée avec /about ─── */}
         <section className="border-b border-hairline">
           <div className="mx-auto max-w-6xl p-8 md:p-16">
             <Reveal>
@@ -149,64 +111,6 @@ export default function Home() {
                   <ExperienceCard exp={exp} />
                 </Reveal>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ─── Stats — charts ─── */}
-        <section className="border-b border-hairline">
-          <div className="mx-auto max-w-6xl p-8 md:p-16">
-            <Reveal>
-              <Eyebrow>{t.home.statsEyebrow}</Eyebrow>
-            </Reveal>
-            <div className="mt-12 grid grid-cols-1 border-t border-l border-hairline md:grid-cols-12">
-              <Reveal className="border-r border-b border-hairline md:col-span-8">
-                <div className="p-6 md:p-8">
-                  <p className="font-mono text-[10px] tracking-[0.2em] text-fg-muted uppercase">
-                    {t.home.visitsLabel}
-                  </p>
-                  <p className="mt-2 text-3xl font-semibold tracking-tight">
-                    128,400
-                  </p>
-                  <div className="mt-6">
-                    <AreaChart
-                      animationDuration={1400}
-                      aspectRatio="16 / 7"
-                      data={TRAFFIC}
-                      margin={{ top: 8, right: 8, bottom: 8, left: 8 }}
-                    >
-                      <Area
-                        dataKey="visits"
-                        fill="#7c3aed"
-                        fillOpacity={0.25}
-                        gradientToOpacity={0}
-                        stroke="#a78bfa"
-                        strokeWidth={2}
-                      />
-                      <Grid horizontal numTicksRows={4} strokeOpacity={0.4} />
-                      <ChartTooltip showDatePill={false} />
-                      <XAxis numTicks={4} />
-                    </AreaChart>
-                  </div>
-                </div>
-              </Reveal>
-              <Reveal
-                className="border-r border-b border-hairline md:col-span-4"
-                delay={0.1}
-              >
-                <div className="flex h-full flex-col items-center justify-center p-6 md:p-8">
-                  <RingChart
-                    baseInnerRadius={52}
-                    data={SKILLS}
-                    strokeWidth={10}
-                  >
-                    {SKILLS.map((skill, i) => (
-                      <Ring index={i} key={skill.label} />
-                    ))}
-                    <RingCenter defaultLabel={t.home.skillsLabel} />
-                  </RingChart>
-                </div>
-              </Reveal>
             </div>
           </div>
         </section>
@@ -236,6 +140,17 @@ export default function Home() {
                       ↗
                     </span>
                   </a>
+                  <a
+                    className="group inline-flex items-center gap-3 border border-fg/20 px-6 py-3 text-sm font-medium text-fg transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-fg hover:text-bg"
+                    href="https://github.com/CLVwp"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    GitHub
+                    <span className="transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1">
+                      ↗
+                    </span>
+                  </a>
                 </div>
               </Reveal>
             </div>
@@ -258,7 +173,7 @@ export default function Home() {
             cell={20}
             className="opacity-60"
             cols={24}
-            labels={[{ text: "CLM — 2026", col: 1, row: 3 }]}
+            labels={[{ text: "CLM · 2026", col: 1, row: 3 }]}
             rows={6}
           />
           <p className="mt-8 font-mono text-xs tracking-[0.2em] text-fg/30 uppercase">
