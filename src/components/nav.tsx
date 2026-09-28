@@ -32,7 +32,7 @@ export function Nav() {
         <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-stretch">
           <Link
             className="flex items-stretch border-r border-hairline"
-            href="https://cv.clementviellard.com"
+            href="https://mycv.clementviellard.com"
             target="_blank"
             rel="noreferrer"
           >

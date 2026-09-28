@@ -580,7 +580,7 @@ export default function AboutPage() {
                 <div className="mt-12 flex flex-wrap gap-4">
                   <a
                     className="group inline-flex items-center gap-3 border border-fg/20 px-6 py-3 text-sm font-medium text-fg transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-fg hover:text-bg"
-                    href="https://cv.clementviellard.com"
+                    href="https://mycv.clementviellard.com"
                     rel="noopener noreferrer"
                     target="_blank"
                   >
