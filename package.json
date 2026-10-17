@@ -10,8 +10,9 @@
     "lint": "biome check",
     "lint:fix": "biome check --write",
     "format": "biome format --write",
-    "typecheck": "tsc --noEmit",
-    "validate": "biome check && tsc --noEmit && bun scripts/check-chars.ts"
+    "typecheck": "bun check",
+    "validate": "biome check && bun check && bun scripts/check-chars.ts",
+    "ci": "biome ci && bun check"
   },
   "dependencies": {
     "@number-flow/react": "^0.6.2",
@@ -24,18 +25,18 @@
     "clsx": "^2.1.1",
     "d3-array": "^3.2.4",
     "d3-shape": "^3.2.0",
-    "motion": "^13.4.4",
-    "next": "16.3.8",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
-    "shadcn": "^4.21.0",
+    "motion": "^14.3.0",
+    "next": "16.4.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "shadcn": "^4.22.0",
     "tailwind-merge": "^3.7.0",
     "tw-animate-css": "^1.4.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.2",
+    "@biomejs/biome": "2.5.15",
     "@tailwindcss/postcss": "^4.3.3",
-    "@types/node": "^20.19.43",
+    "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "tailwindcss": "^4.3.3",
