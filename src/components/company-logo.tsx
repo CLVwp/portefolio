@@ -64,6 +64,7 @@ export function CompanyLogo({ company, className }: CompanyLogoProps) {
       alt={logo.alt}
       className={`${logo.h} w-auto object-contain ${className ?? ""}`}
       height={logo.height}
+      loading="eager"
       src={logo.src}
       width={logo.width}
     />
